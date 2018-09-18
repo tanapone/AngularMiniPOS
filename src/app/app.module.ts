@@ -6,16 +6,19 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms'
 import { Ng2Webstorage } from 'ngx-webstorage'
-
+import { ReactiveFormsModule } from '@angular/forms'
 //Component
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component'
 import { ListAllUserComponent } from './components/list-all-user/list-all-user.component'
+import { EditUserDetailsComponent } from './components/edit-user-details/edit-user-details.component';
+import { AddUserComponent } from './components/add-user/add-user.component'
 //Service
 import { WsTaskService } from './shared_service/ws-task.service';
 import { LoginControllerService } from './shared_service/login-controller.service'
-import { ListAllUserControllerService } from './shared_service/list-all-user-controller.service'
+import { ListAllUserControllerService } from './shared_service/list-all-user-controller.service';
+
   const appRoutes:Routes=[
     {
       path:'',
@@ -28,6 +31,14 @@ import { ListAllUserControllerService } from './shared_service/list-all-user-con
     {
       path:'list-all-users',
       component:ListAllUserComponent
+    },
+    {
+      path:'create/user',
+      component:AddUserComponent
+    },
+    {
+      path:'edit/user/:id',
+      component:EditUserDetailsComponent
     }
   ]
 
@@ -36,7 +47,9 @@ import { ListAllUserControllerService } from './shared_service/list-all-user-con
     AppComponent,
     LoginComponent,
     NavbarComponent,
-    ListAllUserComponent
+    ListAllUserComponent,
+    EditUserDetailsComponent,
+    AddUserComponent
   ],
   imports: [
     BrowserModule,
@@ -45,6 +58,7 @@ import { ListAllUserControllerService } from './shared_service/list-all-user-con
     FormsModule,
     RouterModule.forRoot(appRoutes),
     Ng2Webstorage,
+    ReactiveFormsModule
   ],
   providers: [
     WsTaskService,

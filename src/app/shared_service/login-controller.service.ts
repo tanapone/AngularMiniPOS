@@ -25,7 +25,6 @@ export class LoginControllerService {
         newUser.setAuthKey(data.authKey)
         this.localSt.store('authKey',responseData.authKey)
         this.router.navigate(['/list-all-users']);
-        console.log('seted')
         return JSON.stringify(newUser)
       }
       // return newUser

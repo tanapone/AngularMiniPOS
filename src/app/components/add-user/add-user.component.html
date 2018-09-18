@@ -1,0 +1,77 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <div style="margin-top:6em">
+        <div class="row justify-content-center">
+            <div class="col-md-6 create-user-form">
+                <h2 style="text-align:center">เพิ่มบัญชีผู้ใช้</h2>
+                <form novalidate [formGroup]="form" (ngSubmit)="addUser(form)">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="fistName">ชื่อ</label>
+                            <label style="color:red;float:right" *ngIf="form.get('firstName').hasError('required') && form.get('firstName').touched">
+                            กรุณากรอกชื่อ
+                        </label>
+                            <input type="text" class="form-control" name="fistName" autocomplete="off" placeholder="firstname" formControlName="firstName" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="lastName">นามสกุล</label>
+                            <label style="color:red;float:right" *ngIf="form.get('lastName').hasError('required') && form.get('lastName').touched">
+                            กรุณากรอกนามสกุล
+                        </label>
+                            <input type="text" class="form-control" name="lastName" autocomplete="off" placeholder="lastname" formControlName="lastName" required>
+                        </div>
+                    </div>
+                    <label for="username">ชื่อบัญชี</label>
+                    <label style="color:red;float:right" *ngIf="form.get('username').hasError('required') && form.get('username').touched">
+                        กรุณากรอกชื่อบัญชี
+                    </label>
+                    <input type="text" class="form-control" name="username" autocomplete="off" placeholder="username" formControlName="username" required>
+
+                    <label for="password">รหัสผ่าน</label>
+                    <label style="color:red;float:right" *ngIf="form.get('password').hasError('required') && form.get('password').touched">
+                        กรุณากรอกรหัสผ่าน
+                    </label>
+                    <input type="password" class="form-control" name="password" autocomplete="off" placeholder="password" formControlName="password" required>
+                    <label for="retype-password">ยืนยัน-รหัสผ่าน</label>
+                    <label style="color:red;float:right" *ngIf="form.get('retypePassword').touched && form.get('retypePassword').value != form.get('password').value">
+                        รหัสผ่านไม่ตรงกัน
+                    </label>
+                    <input type="password" class="form-control" name="retype-password" autocomplete="off" placeholder="retype-password" formControlName="retypePassword" required>
+
+                    <label for="email">อีเมล</label>
+                    <label style="color:red;float:right" *ngIf="form.get('email').invalid && form.get('email').touched">
+                        กรุณากรอกอีเมลที่ถูกต้อง
+                    </label>
+                    <input type="email" class="form-control" name="email" autocomplete="off" placeholder="e-mail" formControlName="email" required>
+
+                    <label for="phoneNumber">เบอร์โทรติดต่อ</label>
+                    <label style="color:red;float:right" *ngIf="form.get('phoneNumber').invalid && form.get('phoneNumber').touched">
+                        กรุณากรอกเบอร์โทรติดต่อที่ถูกต้อง
+                    </label>
+                    <input type="number" class="form-control" name="phoneNumber" autocomplete="off" placeholder="phone number" formControlName="phoneNumber" required>
+
+                    <label for="address">ที่อยู่ปัจจุบัน</label>
+                    <label style="color:red;float:right" *ngIf="form.get('address').invalid && form.get('address').touched">
+                        กรุณากรอกทีอยู่
+                    </label>
+                    <textarea name="address" class="form-control" placeholder="address" formControlName="address" required>
+                    </textarea>
+
+                    <label for="userType">ประเภทผู้ใช้</label>
+                    <label style="color:red;float:right" *ngIf="form.get('userType').hasError('required') && form.get('userType').touched">
+                        กรุณาเลือกประเภทผู้ใช้
+                    </label>
+                    <select class="form-control" name="userType" formControlName="userType" required>
+                      <option value=0>พนักงาน</option>
+                      <option value=1>ผู้จัดการ</option>
+                    </select>
+                    <button type="submit" class="btn btn-outline-primary" style="margin-top:1em;float:right" [disabled]="form.invalid">เพิ่มบัญชีผู้ใช้</button>
+                </form>
+            </div>
+        </div>
+        <div class="alert alert-danger" role="alert" *ngIf="errMsg!=''" style="text-align:center;">
+            {{ errMsg }}
+        </div>
+    </div>
+</div>
