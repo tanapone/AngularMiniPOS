@@ -1,1 +1,22 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: 'Kanit';
+    src: url('fonts/Kanit-Regular.ttf')
+}
+
+body,
+html {
+    font-family: Kanit;
+    height: 100%;
+}
+
+.login-background {
+    background-color: #B2DFDB;
+    height: 100%;
+}
+
+.login-background .login-frm {
+    background-color: #fff;
+    padding: 20px;
+    margin-top: 10em;
+    margin-bottom: 2em;
+}
