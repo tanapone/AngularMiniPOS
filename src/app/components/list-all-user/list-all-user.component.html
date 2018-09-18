@@ -1,11 +1,13 @@
 <app-navbar></app-navbar>
 <div class="container">
     <div style="margin-top:6em">
+
+        <button class="btn btn-outline-primary" style="float:right">เพิ่มบัญชี</button>
+
         <h2>บัญชีผู้ใช้ทั้งหมด</h2>
         <table class="table">
             <thead>
                 <tr>
-                    <th>ลำดับที่</th>
                     <th>หมายเลขบัญชี</th>
                     <th>ชื่อบัญชี</th>
                     <th>อีเมล</th>
@@ -14,14 +16,15 @@
             </thead>
             <tbody>
                 <tr *ngFor="let user of users; index as i">
-                    <td>{{i}}</td>
-                    <td>{{ user.id }}</td>
-                    <td>{{ user.username }}</td>
-                    <td>{{ user.email }}</td>
+                    <td>{{ user.getId() }}</td>
+                    <td>{{ user.getUsername() }}</td>
+                    <td>{{ user.getEmail() }}</td>
                     <td>
                     </td>
                 </tr>
             </tbody>
         </table>
+
+
     </div>
 </div>

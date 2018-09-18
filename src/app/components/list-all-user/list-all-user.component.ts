@@ -15,6 +15,7 @@ export class ListAllUserComponent implements OnInit {
     this.listAllUserController.getAllUsers().then((res:User[])=>{
       this.users = res
     })
+    
     console.log(this.users)
   }
   ngOnInit() {
