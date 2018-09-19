@@ -28,7 +28,6 @@ export class ListAllUserControllerService {
         resUser.setPhoneNumber(user.phoneNumber)
         users.push(resUser)
       }
-      console.log(users)
       return users
     })
   }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ListAllUserControllerService} from 'src/app/shared_service/list-all-user-controller.service'
 import { User } from 'src/app/entity/user'
+import { RemoveUserControllerService } from 'src/app/shared_service/remove-user-controller.service'
 
 @Component({
   selector: 'app-list-all-user',
@@ -9,15 +10,22 @@ import { User } from 'src/app/entity/user'
 })
 export class ListAllUserComponent implements OnInit {
  private users = new Array<User>();
-  constructor(private listAllUserController:ListAllUserControllerService) { }
+  constructor(private listAllUserController:ListAllUserControllerService,private removeUserController:RemoveUserControllerService) { }
  
+  errMsg:string=''
+
   getAllUsers(){
     this.listAllUserController.getAllUsers().then((res:User[])=>{
       this.users = res
     })
-    
-    console.log(this.users)
   }
+
+  removeUser(id:Number){
+    this.removeUserController.removeUser(id).then((res:any)=>{
+      this.getAllUsers()
+    })
+  }
+
   ngOnInit() {
     this.getAllUsers()
   }

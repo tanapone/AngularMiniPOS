@@ -23,9 +23,27 @@
                         <a [routerLink]="['/edit/user/'+user.getId()]">
                             <i class="fa fa-edit"></i>
                         </a>
+                        |
+                        <a (click)="confirmRemoveModal.open()">
+                            <i class="fa fa-trash-alt"></i>
+                        </a>
+                        <modal #confirmRemoveModal>
+                            <ng-template #modalHeader>
+                                <h4>คำเตือน</h4>
+                            </ng-template>
+                            <ng-template #modalBody>
+                                คุณต้องการลบบัญชี {{ user.getUsername() }} ใช่หรือไม่
+                            </ng-template>
+                            <ng-template #modalFooter>
+                                <button class="btn btn-outline-danger" (click)="confirmRemoveModal.close()">ยกเลิก</button>
+                                <button class="btn btn-outline-primary" (click)="removeUser(user.getId())">ยืนยันการลบ</button>
+                            </ng-template>
+                        </modal>
+
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
+<app-footer></app-footer>

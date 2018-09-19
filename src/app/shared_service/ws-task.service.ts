@@ -28,4 +28,15 @@ export class WsTaskService {
       }
     })
   }
+
+  public doDelete(url:string){
+    return new Promise((resolve,reject)=>{
+      this._http.delete(this.apiUrl+url).subscribe(data=>{
+        resolve(data)
+      }),error=>{
+        reject(error)
+      }
+    })
+  }
+
 }

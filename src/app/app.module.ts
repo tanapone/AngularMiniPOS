@@ -4,9 +4,10 @@ import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
-import { FormsModule } from '@angular/forms'
-import { Ng2Webstorage } from 'ngx-webstorage'
-import { ReactiveFormsModule } from '@angular/forms'
+import { FormsModule } from '@angular/forms';
+import { Ng2Webstorage } from 'ngx-webstorage';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ModalModule } from 'angular-custom-modal'
 //Component
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -18,6 +19,7 @@ import { AddUserComponent } from './components/add-user/add-user.component'
 import { WsTaskService } from './shared_service/ws-task.service';
 import { LoginControllerService } from './shared_service/login-controller.service'
 import { ListAllUserControllerService } from './shared_service/list-all-user-controller.service';
+import { FooterComponent } from './components/footer/footer.component';
 
   const appRoutes:Routes=[
     {
@@ -49,7 +51,8 @@ import { ListAllUserControllerService } from './shared_service/list-all-user-con
     NavbarComponent,
     ListAllUserComponent,
     EditUserDetailsComponent,
-    AddUserComponent
+    AddUserComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +61,8 @@ import { ListAllUserControllerService } from './shared_service/list-all-user-con
     FormsModule,
     RouterModule.forRoot(appRoutes),
     Ng2Webstorage,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ModalModule
   ],
   providers: [
     WsTaskService,
