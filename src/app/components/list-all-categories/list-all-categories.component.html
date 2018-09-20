@@ -1,0 +1,53 @@
+<app-navbar></app-navbar>
+<div class="container-fluid">
+    <div class="container">
+        <div style="margin-top:6em">
+            <a class="btn btn-outline-primary" style="float:right" [routerLink]="['/create/user']">
+         เพิ่มประเภทสินค้า
+        </a>
+            <h2>รายชื่อประเภทสินค้า</h2>
+            <div class="alert alert-danger" role="alert" *ngIf="categories.length<1; else foundCategories" style="text-align:center;">
+                ไม่พบข้อมูลประเภทสินค้า
+            </div>
+            <ng-template #foundCategories>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ลำดับที่</th>
+                            <th>ชื่อประเภทสินค้า</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let company of companies; index as i">
+                            <td>{{ i+1 }}</td>
+                            <td>{{ company.getCategoryName() }}</td>
+                            <td>
+                                <a [routerLink]="['/edit/user/'+user.getId()]">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                                |
+                                <a (click)="confirmRemoveModal.open()">
+                                    <i class="fa fa-trash-alt"></i>
+                                </a>
+                                <modal #confirmRemoveModal>
+                                    <ng-template #modalHeader>
+                                        <h4>คำเตือน</h4>
+                                    </ng-template>
+                                    <ng-template #modalBody>
+                                        คุณต้องการลบประเภทสินค้า {{ company.getCategoryName() }} ใช่หรือไม่
+                                    </ng-template>
+                                    <ng-template #modalFooter>
+                                        <button class="btn btn-outline-danger" (click)="confirmRemoveModal.close()">ยกเลิก</button>
+                                        <button class="btn btn-outline-primary" (click)="removeUser(user.getId())">ยืนยันการลบ</button>
+                                    </ng-template>
+                                </modal>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </ng-template>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

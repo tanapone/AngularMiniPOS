@@ -21,6 +21,7 @@ import { LoginControllerService } from './shared_service/login-controller.servic
 import { ListAllUserControllerService } from './shared_service/list-all-user-controller.service';
 import { FooterComponent } from './components/footer/footer.component';
 import { ListAllCompaniesComponent } from './components/list-all-companies/list-all-companies.component';
+import { ListAllCategoriesComponent } from './components/list-all-categories/list-all-categories.component';
 
   const appRoutes:Routes=[
     {
@@ -46,6 +47,10 @@ import { ListAllCompaniesComponent } from './components/list-all-companies/list-
     {
       path:'list-all-companies',
       component:ListAllCompaniesComponent
+    },
+    {
+      path:'list-all-categories',
+      component:ListAllCategoriesComponent
     }
   ]
 
@@ -58,7 +63,8 @@ import { ListAllCompaniesComponent } from './components/list-all-companies/list-
     EditUserDetailsComponent,
     AddUserComponent,
     FooterComponent,
-    ListAllCompaniesComponent
+    ListAllCompaniesComponent,
+    ListAllCategoriesComponent
   ],
   imports: [
     BrowserModule,
