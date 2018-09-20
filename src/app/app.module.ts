@@ -20,6 +20,7 @@ import { WsTaskService } from './shared_service/ws-task.service';
 import { LoginControllerService } from './shared_service/login-controller.service'
 import { ListAllUserControllerService } from './shared_service/list-all-user-controller.service';
 import { FooterComponent } from './components/footer/footer.component';
+import { ListAllCompaniesComponent } from './components/list-all-companies/list-all-companies.component';
 
   const appRoutes:Routes=[
     {
@@ -41,6 +42,10 @@ import { FooterComponent } from './components/footer/footer.component';
     {
       path:'edit/user/:id',
       component:EditUserDetailsComponent
+    },
+    {
+      path:'list-all-companies',
+      component:ListAllCompaniesComponent
     }
   ]
 
@@ -52,7 +57,8 @@ import { FooterComponent } from './components/footer/footer.component';
     ListAllUserComponent,
     EditUserDetailsComponent,
     AddUserComponent,
-    FooterComponent
+    FooterComponent,
+    ListAllCompaniesComponent
   ],
   imports: [
     BrowserModule,
