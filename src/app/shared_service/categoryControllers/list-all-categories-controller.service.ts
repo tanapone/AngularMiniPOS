@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { WsTaskService } from './ws-task.service';
+import { WsTaskService } from '../ws-task.service';
 import { Category } from 'src/app/entity/category';
 import { LocalStorageService } from 'ngx-webstorage';  
 

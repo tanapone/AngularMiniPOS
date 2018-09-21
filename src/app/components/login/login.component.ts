@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { User } from 'src/app/entity/user';
 import { LocalStorageService } from 'ngx-webstorage';
-import { LoginControllerService } from 'src/app/shared_service/login-controller.service'
+import { LoginControllerService } from '../../shared_service/loginControllers/login-controller.service'
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',

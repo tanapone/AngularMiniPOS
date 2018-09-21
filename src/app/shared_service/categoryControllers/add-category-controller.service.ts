@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Category } from 'src/app/entity/category';
 import { LocalStorageService } from 'ngx-webstorage';  
-import { WsTaskService } from './ws-task.service';
+import { WsTaskService } from '../ws-task.service';
 import { Router } from '@angular/router'
 @Injectable({
   providedIn: 'root'

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormControl,Validators } from '@angular/forms'
 import { Category } from 'src/app/entity/category'
-import { AddCategoryControllerService } from 'src/app/shared_service/add-category-controller.service';
+import { AddCategoryControllerService } from '../../shared_service/categoryControllers/add-category-controller.service';
 import { Router } from '@angular/router'
 @Component({
   selector: 'app-add-category',

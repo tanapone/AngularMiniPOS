@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ListAllUserControllerService} from 'src/app/shared_service/list-all-user-controller.service'
+import { ListAllUserControllerService} from '../../shared_service/userControllers/list-all-user-controller.service'
 import { User } from 'src/app/entity/user'
-import { RemoveUserControllerService } from 'src/app/shared_service/remove-user-controller.service'
+import { RemoveUserControllerService } from '../../shared_service/userControllers/remove-user-controller.service'
 
 @Component({
   selector: 'app-list-all-user',

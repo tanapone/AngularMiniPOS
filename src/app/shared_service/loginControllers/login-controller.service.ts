@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from 'src/app/entity/user';
-import { WsTaskService } from './ws-task.service';
+import { WsTaskService } from '../ws-task.service';
 import { environment } from 'src/environments/environment';
 import { LocalStorageService } from 'ngx-webstorage';
 import { Router } from "@angular/router";

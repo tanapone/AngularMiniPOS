@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/entity/user';
-import { EditUserDetailsControllerService } from 'src/app/shared_service/edit-user-details-controller.service'
+import { EditUserDetailsControllerService } from '../../shared_service/userControllers/edit-user-details-controller.service'
 import { FormGroup,FormControl,Validators } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router';
 

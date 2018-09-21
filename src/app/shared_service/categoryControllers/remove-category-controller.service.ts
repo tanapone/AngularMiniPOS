@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LocalStorageService } from 'ngx-webstorage';  
-import { WsTaskService } from './ws-task.service';
+import { WsTaskService } from '../ws-task.service';
 
 @Injectable({
   providedIn: 'root'

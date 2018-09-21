@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/entity/user';
-import { AddUserContollerService } from 'src/app/shared_service/add-user-contoller.service'
+import { AddUserContollerService } from '../../shared_service/userControllers/add-user-contoller.service'
 import { FormGroup,FormControl,Validators } from '@angular/forms'
 
 @Component({

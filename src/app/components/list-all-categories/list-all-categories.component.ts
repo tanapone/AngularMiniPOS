@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Category } from 'src/app/entity/category';
-import { ListAllCategoriesControllerService } from 'src/app/shared_service/list-all-categories-controller.service';
-import { RemoveCategoryControllerService } from 'src/app/shared_service/remove-category-controller.service';
+import { ListAllCategoriesControllerService } from '../../shared_service/categoryControllers/list-all-categories-controller.service';
+import { RemoveCategoryControllerService } from '../../shared_service/categoryControllers/remove-category-controller.service';
 
 @Component({
   selector: 'app-list-all-categories',
