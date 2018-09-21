@@ -27,6 +27,7 @@ export class AddUserComponent implements OnInit {
     user.setUserType(form.value.userType)
     user.setAddress(form.value.address)
     this.addUserController.addUser(user).then((res:any)=>{
+      if(res){
       let responseData = JSON.parse(res)
       if(responseData.message){
         if(responseData.message=='Please change username.'){
@@ -35,6 +36,7 @@ export class AddUserComponent implements OnInit {
           this.errMsg = 'กรุณาเปลี่ยนอีเมล'
         }
       }
+    }
     })
   }
 

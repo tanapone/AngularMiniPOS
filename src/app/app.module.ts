@@ -15,13 +15,17 @@ import { NavbarComponent } from './components/navbar/navbar.component'
 import { ListAllUserComponent } from './components/list-all-user/list-all-user.component'
 import { EditUserDetailsComponent } from './components/edit-user-details/edit-user-details.component';
 import { AddUserComponent } from './components/add-user/add-user.component'
+import { FooterComponent } from './components/footer/footer.component';
+import { ListAllCompaniesComponent } from './components/list-all-companies/list-all-companies.component';
+import { ListAllCategoriesComponent } from './components/list-all-categories/list-all-categories.component';
+import { AddCategoryComponent } from './components/add-category/add-category.component';
 //Service
 import { WsTaskService } from './shared_service/ws-task.service';
 import { LoginControllerService } from './shared_service/login-controller.service'
 import { ListAllUserControllerService } from './shared_service/list-all-user-controller.service';
-import { FooterComponent } from './components/footer/footer.component';
-import { ListAllCompaniesComponent } from './components/list-all-companies/list-all-companies.component';
-import { ListAllCategoriesComponent } from './components/list-all-categories/list-all-categories.component';
+import { AddUserContollerService } from './shared_service/add-user-contoller.service';
+import { RemoveUserControllerService } from './shared_service/remove-user-controller.service';
+import { ListAllCategoriesControllerService } from './shared_service/list-all-categories-controller.service';
 
   const appRoutes:Routes=[
     {
@@ -51,6 +55,10 @@ import { ListAllCategoriesComponent } from './components/list-all-categories/lis
     {
       path:'list-all-categories',
       component:ListAllCategoriesComponent
+    },
+    {
+      path:'create/category',
+      component:AddCategoryComponent
     }
   ]
 
@@ -64,7 +72,8 @@ import { ListAllCategoriesComponent } from './components/list-all-categories/lis
     AddUserComponent,
     FooterComponent,
     ListAllCompaniesComponent,
-    ListAllCategoriesComponent
+    ListAllCategoriesComponent,
+    AddCategoryComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +88,10 @@ import { ListAllCategoriesComponent } from './components/list-all-categories/lis
   providers: [
     WsTaskService,
     LoginControllerService,
-    ListAllUserControllerService
+    ListAllUserControllerService,
+    AddUserContollerService,
+    RemoveUserControllerService,
+    ListAllCategoriesControllerService
   ],
   bootstrap: [AppComponent]
 })
