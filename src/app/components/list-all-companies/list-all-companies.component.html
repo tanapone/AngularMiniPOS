@@ -2,7 +2,7 @@
 <div class="container-fluid">
     <div class="container">
         <div style="margin-top:6em">
-            <a class="btn btn-outline-primary" style="float:right" [routerLink]="['/create/user']">
+            <a class="btn btn-outline-primary" style="float:right" [routerLink]="['/create/company']">
          เพิ่มบริษัทนำเข้า
         </a>
             <h2>รายชื่อบริษัทนำเข้า</h2>
@@ -25,7 +25,7 @@
                             <td>{{ company.getCompanyName() }}</td>
                             <td>{{ company.getCompanyEmail() }}</td>
                             <td>
-                                <a [routerLink]="['/edit/user/'+user.getId()]">
+                                <a [routerLink]="['/edit/company/'+company.getId()]">
                                     <i class="fa fa-edit"></i>
                                 </a>
                                 |
@@ -37,11 +37,11 @@
                                         <h4>คำเตือน</h4>
                                     </ng-template>
                                     <ng-template #modalBody>
-                                        คุณต้องการลบบัญชี {{ user.getUsername() }} ใช่หรือไม่
+                                        คุณต้องการลบบริษัท {{ company.getCompanyName() }} ใช่หรือไม่
                                     </ng-template>
                                     <ng-template #modalFooter>
                                         <button class="btn btn-outline-danger" (click)="confirmRemoveModal.close()">ยกเลิก</button>
-                                        <button class="btn btn-outline-primary" (click)="removeUser(user.getId())">ยืนยันการลบ</button>
+                                        <button class="btn btn-outline-primary" (click)="removeCompany(company.getId())">ยืนยันการลบ</button>
                                     </ng-template>
                                 </modal>
 

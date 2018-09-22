@@ -4,59 +4,64 @@
         <div class="row justify-content-center">
             <div class="col-md-6 create-user-form">
                 <h2 style="text-align:center;margin-bottom:1em">แก้ไขบัญชีผู้ใช้</h2>
-                <form novalidate [formGroup]="form" (ngSubmit)="editUser(form)">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label for="fistName">ชื่อ</label>
-                            <label style="color:red;float:right" *ngIf="form.get('firstName').hasError('required') && form.get('firstName').touched">
+                <div class="alert alert-danger" role="alert" *ngIf="user.id==undefined; else editUserForm" style="margin-top:1em;text-align:center;">
+                    ไม่พบข้อมูลบัญชีผู้ใช้
+                </div>
+                <ng-template #editUserForm>
+                    <form novalidate [formGroup]="form" (ngSubmit)="editUser(form)">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="fistName">ชื่อ</label>
+                                <label style="color:red;float:right" *ngIf="form.get('firstName').hasError('required') && form.get('firstName').touched">
                             กรุณากรอกชื่อ
                         </label>
-                            <input type="text" class="form-control" name="fistName" autocomplete="off" placeholder="firstname" formControlName="firstName" [(ngModel)]="user.firstName" required>
-                        </div>
+                                <input type="text" class="form-control" name="fistName" autocomplete="off" placeholder="firstname" formControlName="firstName" [(ngModel)]="user.firstName" required>
+                            </div>
 
-                        <div class="col-md-6">
-                            <label for="lastName">นามสกุล</label>
-                            <label style="color:red;float:right" *ngIf="form.get('lastName').hasError('required') && form.get('lastName').touched">
+                            <div class="col-md-6">
+                                <label for="lastName">นามสกุล</label>
+                                <label style="color:red;float:right" *ngIf="form.get('lastName').hasError('required') && form.get('lastName').touched">
                             กรุณากรอกนามสกุล
                         </label>
-                            <input type="text" class="form-control" name="lastName" autocomplete="off" placeholder="lastname" formControlName="lastName" [(ngModel)]="user.lastName" required>
+                                <input type="text" class="form-control" name="lastName" autocomplete="off" placeholder="lastname" formControlName="lastName" [(ngModel)]="user.lastName" required>
+                            </div>
                         </div>
-                    </div>
-                    <label for="username">ชื่อบัญชี</label>
-                    <label style="color:red;float:right" *ngIf="form.get('username').hasError('required') && form.get('username').touched">
+                        <label for="username">ชื่อบัญชี</label>
+                        <label style="color:red;float:right" *ngIf="form.get('username').hasError('required') && form.get('username').touched">
                         กรุณากรอกชื่อบัญชี
                     </label>
-                    <input type="text" class="form-control" name="username" autocomplete="off" placeholder="username" formControlName="username" [(ngModel)]="user.username" required>
+                        <input type="text" class="form-control" name="username" autocomplete="off" placeholder="username" formControlName="username" [(ngModel)]="user.username" required>
 
-                    <label for="email">อีเมล</label>
-                    <label style="color:red;float:right" *ngIf="form.get('email').invalid && form.get('email').touched">
+                        <label for="email">อีเมล</label>
+                        <label style="color:red;float:right" *ngIf="form.get('email').invalid && form.get('email').touched">
                         กรุณากรอกอีเมลที่ถูกต้อง
                     </label>
-                    <input type="email" class="form-control" name="email" autocomplete="off" placeholder="e-mail" formControlName="email" [(ngModel)]="user.email" required>
+                        <input type="email" class="form-control" name="email" autocomplete="off" placeholder="e-mail" formControlName="email" [(ngModel)]="user.email" required>
 
-                    <label for="phoneNumber">เบอร์โทรติดต่อ</label>
-                    <label style="color:red;float:right" *ngIf="form.get('phoneNumber').invalid && form.get('phoneNumber').touched">
+                        <label for="phoneNumber">เบอร์โทรติดต่อ</label>
+                        <label style="color:red;float:right" *ngIf="form.get('phoneNumber').invalid && form.get('phoneNumber').touched">
                         กรุณากรอกเบอร์โทรติดต่อที่ถูกต้อง
                     </label>
-                    <input type="number" class="form-control" name="phoneNumber" autocomplete="off" placeholder="phone number" formControlName="phoneNumber" [(ngModel)]="user.phoneNumber" required>
+                        <input type="number" class="form-control" name="phoneNumber" autocomplete="off" placeholder="phone number" formControlName="phoneNumber" [(ngModel)]="user.phoneNumber" required>
 
-                    <label for="address">ที่อยู่ปัจจุบัน</label>
-                    <label style="color:red;float:right" *ngIf="form.get('address').invalid && form.get('address').touched">
+                        <label for="address">ที่อยู่ปัจจุบัน</label>
+                        <label style="color:red;float:right" *ngIf="form.get('address').invalid && form.get('address').touched">
                         กรุณากรอกทีอยู่
                     </label>
-                    <textarea name="address" class="form-control" placeholder="address" formControlName="address" [(ngModel)]="user.address" required>
+                        <textarea name="address" class="form-control" placeholder="address" formControlName="address" [(ngModel)]="user.address" required>
                     </textarea>
 
-                    <label for="userType">ประเภทผู้ใช้</label>
-                    <label style="color:red;float:right" *ngIf="form.get('userType').hasError('required') && form.get('userType').touched">
+                        <label for="userType">ประเภทผู้ใช้</label>
+                        <label style="color:red;float:right" *ngIf="form.get('userType').hasError('required') && form.get('userType').touched">
                         กรุณาเลือกประเภทผู้ใช้
                     </label>
-                    <select class="form-control" name="userType" formControlName="userType" [(ngModel)]="user.userType" required>
+                        <select class="form-control" name="userType" formControlName="userType" [(ngModel)]="user.userType" required>
                       <option value=0>พนักงาน</option>
                       <option value=1>ผู้จัดการ</option>
                     </select>
-                    <button type="submit" class="btn btn-outline-primary" style="margin-top:1em;float:right" [disabled]="form.invalid">บันทึกบัญชีผู้ใช้</button>
-                </form>
+                        <button type="submit" class="btn btn-outline-primary" style="margin-top:1em;float:right" [disabled]="form.invalid">บันทึกบัญชีผู้ใช้</button>
+                    </form>
+                </ng-template>
             </div>
         </div>
         <div class="alert alert-danger" role="alert" *ngIf="errMsg!=''" style="margin-top:1em;text-align:center;">

@@ -19,6 +19,10 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ListAllCompaniesComponent } from './components/list-all-companies/list-all-companies.component';
 import { ListAllCategoriesComponent } from './components/list-all-categories/list-all-categories.component';
 import { AddCategoryComponent } from './components/add-category/add-category.component';
+import { AddCompanyComponent } from './components/add-company/add-company.component';
+import { EditCategoryDetailsComponent } from './components/edit-category-details/edit-category-details.component';
+import { EditCompanyDetailsComponent } from './components/edit-company-details/edit-company-details.component';
+
 //Service
 import { WsTaskService } from './shared_service/ws-task.service';
 import { LoginControllerService } from './shared_service/loginControllers/login-controller.service'
@@ -26,9 +30,7 @@ import { ListAllUserControllerService } from './shared_service/userControllers/l
 import { AddUserContollerService } from './shared_service/userControllers/add-user-contoller.service';
 import { RemoveUserControllerService } from './shared_service/userControllers/remove-user-controller.service';
 import { ListAllCategoriesControllerService } from './shared_service/categoryControllers/list-all-categories-controller.service';
-import { AddCompanyComponent } from './components/add-company/add-company.component';
-import { EditCategoryDetailsComponent } from './components/edit-category-details/edit-category-details.component';
-import { EditCompanyDetailsComponent } from './components/edit-company-details/edit-company-details.component';
+
 
   const appRoutes:Routes=[
     {
@@ -56,12 +58,24 @@ import { EditCompanyDetailsComponent } from './components/edit-company-details/e
       component:ListAllCompaniesComponent
     },
     {
+      path:'create/company',
+      component:AddCompanyComponent
+    },
+    {
+      path:'edit/company/:id',
+      component:EditCompanyDetailsComponent
+    },
+    {
       path:'list-all-categories',
       component:ListAllCategoriesComponent
     },
     {
       path:'create/category',
       component:AddCategoryComponent
+    },
+    {
+      path:'edit/category/:id',
+      component:EditCategoryDetailsComponent
     }
   ]
 

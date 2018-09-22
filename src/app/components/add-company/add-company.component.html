@@ -1,3 +1,42 @@
-<p>
-  add-company works!
-</p>
+<app-navbar></app-navbar>
+<div class="container-fluid">
+    <div style="margin-top:6em">
+        <div class="row justify-content-center">
+            <div class="col-md-4 create-company-form">
+                <h2 style="text-align:center">เพิ่มบริษัทนำเข้าสินค้า</h2>
+                <form novalidate [formGroup]="form" (ngSubmit)="addCompany(form)">
+
+                    <label for="companyName">ชื่อบริษัทนำข้า</label>
+                    <label style="color:red;float:right" *ngIf="form.get('companyName').hasError('required') && form.get('companyName').touched">
+                          กรุณากรอกชื่อบริษัทนำเข้า
+                        </label>
+                    <input type="text" class="form-control" name="fistName" autocomplete="off" placeholder="Company name" formControlName="companyName" required>
+
+                    <label for="companyPhoneNumber">เบอร์โทรของบริษัท</label>
+                    <label style="color:red;float:right" *ngIf="form.get('companyPhoneNumber').invalid && form.get('companyPhoneNumber').touched">
+                          กรุณากรอกเบอร์โทรของบริษัท
+                        </label>
+                    <input type="nubmer" class="form-control" name="companyPhoneNumber" autocomplete="off" placeholder="Company phone number" formControlName="companyPhoneNumber" required>
+
+                    <label for="companyEmail">อีเมลของบริษัท</label>
+                    <label style="color:red;float:right" *ngIf="form.get('companyEmail').invalid && form.get('companyEmail').touched">
+                          กรุณากรอกอีเมลของบริษัท
+                        </label>
+                    <input type="email" class="form-control" name="companyEmail" autocomplete="off" placeholder="Company email" formControlName="companyEmail" required>
+
+                    <label for="companyAddress">ที่อยู่บริษัท</label>
+                    <label style="color:red;float:right" *ngIf="form.get('companyAddress').hasError('required') && form.get('companyAddress').touched">
+                          กรุณากรอกที่อยู่บริษัท
+                        </label>
+                    <textarea class="form-control" class="form-control" placeholder="Company email" formControlName="companyAddress" rows="5" required></textarea>
+
+                    <button type="submit" class="btn btn-outline-primary" style="margin-top:1em;float:right" [disabled]="form.invalid">เพิ่มบริษัทนำเข้าสินค้า</button>
+                </form>
+            </div>
+        </div>
+        <div class="alert alert-danger" role="alert" *ngIf="errMsg!=''" style="margin-top:1em;text-align:center;">
+            {{ errMsg }}
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

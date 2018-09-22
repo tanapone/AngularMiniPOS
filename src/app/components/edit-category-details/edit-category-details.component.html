@@ -1,3 +1,28 @@
-<p>
-  edit-category-details works!
-</p>
+<app-navbar></app-navbar>
+<div class="container-fluid">
+    <div style="margin-top:6em">
+        <div class="row justify-content-center">
+            <div class="col-md-4 edit-category-form">
+                <h2 style="text-align:center">แก้ไขประเภทสินค้า</h2>
+                <div class="alert alert-danger" role="alert" *ngIf="category.id==undefined; else editCategoryForm" style="margin-top:1em;text-align:center;">
+                    ไม่พบข้อมูลประเภทสินค้า
+                </div>
+                <ng-template #editCategoryForm>
+                    <form novalidate [formGroup]="form" (ngSubmit)="editCategoryDetails(form)">
+                        <label for="categoryName">ชื่อประเภทสินค้า</label>
+                        <label style="color:red;float:right" *ngIf="form.get('categoryName').hasError('required') && form.get('categoryName').touched">
+                          กรุณากรอกชื่อประเภทสินค้า
+                        </label>
+                        <input type="text" class="form-control" name="fistName" autocomplete="off" placeholder="Category name" formControlName="categoryName" [(ngModel)]="category.categoryName" required>
+
+                        <button type="submit" class="btn btn-outline-primary" style="margin-top:1em;float:right" [disabled]="form.invalid">บันทึกประเภทสินค้า</button>
+                    </form>
+                </ng-template>
+            </div>
+        </div>
+        <div class="alert alert-danger" role="alert" *ngIf="errMsg!=''" style="margin-top:1em;text-align:center;">
+            {{ errMsg }}
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

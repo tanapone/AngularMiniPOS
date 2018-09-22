@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormControl,Validators } from '@angular/forms'
 import { Category } from 'src/app/entity/category'
 import { AddCategoryControllerService } from '../../shared_service/categoryControllers/add-category-controller.service';
-import { Router } from '@angular/router'
+
 @Component({
   selector: 'app-add-category',
   templateUrl: './add-category.component.html',
@@ -14,7 +14,7 @@ export class AddCategoryComponent implements OnInit {
   errMsg:string='';
 
 
-  constructor(private router:Router,private addCategoryController:AddCategoryControllerService) { }
+  constructor(private addCategoryController:AddCategoryControllerService) { }
 
   addCategory(form){
     let category = new Category();
@@ -33,7 +33,7 @@ export class AddCategoryComponent implements OnInit {
 
   ngOnInit() {
     this.form = new FormGroup({
-      categoryName: new FormControl('',Validators.required),
+      categoryName: new FormControl('',Validators.required)
     })
   }
 
