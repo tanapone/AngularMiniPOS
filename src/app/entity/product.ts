@@ -10,6 +10,7 @@ export class Product {
   private productQty: Number;
   private company: Company;
   private category: Category;
+  private productStatus: boolean;
 
 	public getId(): Number {
 		return this.id;
@@ -83,4 +84,12 @@ export class Product {
 		this.category = category;
 	}
 
+	public setProductStatus(productStatus: boolean): void{
+		this.productStatus = productStatus;
+	}
+
+	public getProductStatus():boolean{
+		return this.productStatus
+	}
 }
+

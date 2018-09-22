@@ -1,0 +1,93 @@
+<app-navbar></app-navbar>
+<div class="container-fluid">
+    <div style="margin-top:6em">
+        <div class="row justify-content-center">
+            <div class="col-md-4 create-company-form">
+                <h2 style="text-align:center">แก้ไขสินค้า</h2>
+                <div class="alert alert-danger" role="alert" *ngIf="product.id==undefined; else editProductDetailsForm" style="margin-top:1em;text-align:center;">
+                    {{ errMsg }}
+                </div>
+                <ng-template #editProductDetailsForm>
+                    <form novalidate [formGroup]="form" (ngSubmit)="editProductDetails(form)">
+
+                        <label for="productName">ชื่อสินค้า</label>
+                        <label style="color:red;float:right" *ngIf="form.get('productName').hasError('required') && form.get('productName').touched">
+                          กรอกชื่อสินค้า
+                        </label>
+                        <input type="text" class="form-control" name="productName" autocomplete="off" placeholder="Product name" formControlName="productName" [(ngModel)]="product.productName" required>
+
+                        <label for="productBarcodeID">รหัสบาร์โค้ดสินค้า</label>
+                        <label style="color:red;float:right" *ngIf="form.get('productBarcodeID').hasError('required') && form.get('productBarcodeID').touched">
+                          กรอกรหัสบาร์โค้ดสินค้า
+                        </label>
+                        <input type="text" class="form-control" name="productBarcodeID" autocomplete="off" placeholder="Product barcode" formControlName="productBarcodeID" [(ngModel)]="product.productBarcodeID" required>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="productCapitalPrice">ราคาทุนสินค้า</label>
+                                <label style="color:red;float:right" *ngIf="form.get('productCapitalPrice').hasError('required') && form.get('productCapitalPrice').touched">
+                        กรุณากรอกราคาทุนสินค้า
+                          </label>
+                                <input type="number" class="form-control" name="productCapitalPrice" autocomplete="off" placeholder="Product capital price" formControlName="productCapitalPrice" [(ngModel)]="product.productCapitalPrice" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="productSalePrice">ราคาขายสินค้า</label>
+                                <label style="color:red;float:right" *ngIf="form.get('productSalePrice').hasError('required') && form.get('productSalePrice').touched">
+                        กรุณากรอกราคาขายสินค้า
+                          </label>
+                                <input type="number" class="form-control" name="fistName" autocomplete="off" placeholder="Product sale price" formControlName="productSalePrice" [(ngModel)]="product.productSalePrice" required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="productMinimum">จำนวนสินค้าขั้นต่ำ</label>
+                                <label style="color:red;float:right" *ngIf="form.get('productMinimum').hasError('required') && form.get('productMinimum').touched">
+                            กรุณากรอกจำนวนสินค้าขั้นต่ำ
+                        </label>
+                                <input type="number" class="form-control" name="productMinimum" autocomplete="off" placeholder="Product minimum" formControlName="productMinimum" [(ngModel)]="product.productMinimum" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="productQty">จำนวนสินค้า</label>
+                                <label style="color:red;float:right" *ngIf="form.get('productQty').hasError('required') && form.get('productQty').touched">
+                            กรุณากรอกจำนวนสินค้า
+                        </label>
+                                <input type="number" class="form-control" name="productQty" autocomplete="off" placeholder="Product quantity" formControlName="productQty" [(ngModel)]="product.productQty" required>
+                            </div>
+                        </div>
+
+                        <label for="company">บริษัทนำเข้าสินค้า</label>
+                        <label style="color:red;float:right" *ngIf="form.get('company').hasError('required') && form.get('company').touched">
+                        กรุณาเลือกบริษัทนำเข้าสินค้า
+                    </label>
+                        <select name="company" class="form-control" formControlName="company" [(ngModel)]="selectedCompany">
+                    <option  [ngValue]="company.id" *ngFor="let company of companies">
+                        {{ company.getCompanyName() }}
+                    </option>
+                    </select>
+                        <label for="category">ประเภทสินค้า</label>
+                        <label style="color:red;float:right" *ngIf="form.get('category').hasError('required') && form.get('category').touched">
+                        กรุณาเลือกประเภทสินค้า
+                    </label>
+                        <select name="category" class="form-control" formControlName="category" [(ngModel)]="selectedCategory">
+                      <option [ngValue]="category.id" *ngFor="let category of categories">
+                        {{ category.getCategoryName() }}
+                      </option>
+                    </select>
+
+                        <div class="row">
+                            <label class="form-check-label" style="padding-top:10px;padding-left:35px">
+                            <input class="form-check-input" type="checkbox" name="productStatus" formControlName="productStatus" [(ngModel)]="product.productStatus" [checked]="product.productStatus"> สถานะสินค้า
+                        </label>
+                        </div>
+                        <button type="submit" class="btn btn-outline-primary" style="margin-top:1em;float:right" [disabled]="form.invalid">บันทึกสินค้า</button>
+                    </form>
+                </ng-template>
+            </div>
+        </div>
+        <div class="alert alert-danger" role="alert" *ngIf="errMsg!=''" style="margin-top:1em;text-align:center;">
+            {{ errMsg }}
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

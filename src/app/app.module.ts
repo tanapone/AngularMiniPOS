@@ -22,7 +22,9 @@ import { AddCategoryComponent } from './components/add-category/add-category.com
 import { AddCompanyComponent } from './components/add-company/add-company.component';
 import { EditCategoryDetailsComponent } from './components/edit-category-details/edit-category-details.component';
 import { EditCompanyDetailsComponent } from './components/edit-company-details/edit-company-details.component';
-
+import { ListAllProductsComponent } from './components/list-all-products/list-all-products.component';
+import { AddProductComponent } from './components/add-product/add-product.component';
+import { EditProductDetailsComponent } from './components/edit-product-details/edit-product-details.component';
 //Service
 import { WsTaskService } from './shared_service/ws-task.service';
 import { LoginControllerService } from './shared_service/loginControllers/login-controller.service'
@@ -30,6 +32,7 @@ import { ListAllUserControllerService } from './shared_service/userControllers/l
 import { AddUserContollerService } from './shared_service/userControllers/add-user-contoller.service';
 import { RemoveUserControllerService } from './shared_service/userControllers/remove-user-controller.service';
 import { ListAllCategoriesControllerService } from './shared_service/categoryControllers/list-all-categories-controller.service';
+
 
 
   const appRoutes:Routes=[
@@ -76,6 +79,19 @@ import { ListAllCategoriesControllerService } from './shared_service/categoryCon
     {
       path:'edit/category/:id',
       component:EditCategoryDetailsComponent
+    },
+    {
+      path:'list-all-products',
+      component:ListAllProductsComponent
+      
+    },
+    {
+      path:'create/product',
+      component:AddProductComponent
+    },
+    {
+      path:'edit/product/:id',
+      component:EditProductDetailsComponent
     }
   ]
 
@@ -93,7 +109,10 @@ import { ListAllCategoriesControllerService } from './shared_service/categoryCon
     AddCategoryComponent,
     AddCompanyComponent,
     EditCategoryDetailsComponent,
-    EditCompanyDetailsComponent
+    EditCompanyDetailsComponent,
+    ListAllProductsComponent,
+    AddProductComponent,
+    EditProductDetailsComponent
   ],
   imports: [
     BrowserModule,

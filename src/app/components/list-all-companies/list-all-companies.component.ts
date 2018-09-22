@@ -24,7 +24,7 @@ export class ListAllCompaniesComponent implements OnInit {
       if(res){
         let responseData = JSON.parse(res)
         if(responseData.message){
-          if(responseData.message=='This category still have products.'){
+          if(responseData.message=='This company still have products.'){
             this.errModalMsg = 'ไม่สามารถลบบริษัทนำเข้าสินค้าได้เนื่องจากมีสินค้าใช้บริษัทนำเข้าสินค้านี้อยู่'
           }else if(responseData.message=='no category detail.'){
             this.errModalMsg = 'ไม่พบข้อมูลบริษัทนำเข้าสินค้านี้ในระบบ'
