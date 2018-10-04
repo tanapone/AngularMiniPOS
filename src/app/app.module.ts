@@ -25,6 +25,7 @@ import { EditCompanyDetailsComponent } from './components/edit-company-details/e
 import { ListAllProductsComponent } from './components/list-all-products/list-all-products.component';
 import { AddProductComponent } from './components/add-product/add-product.component';
 import { EditProductDetailsComponent } from './components/edit-product-details/edit-product-details.component';
+import { ResetUserPasswordComponent } from './components/reset-user-password/reset-user-password.component';
 //Service
 import { WsTaskService } from './shared_service/ws-task.service';
 import { LoginControllerService } from './shared_service/loginControllers/login-controller.service'
@@ -43,6 +44,10 @@ import { ListAllCategoriesControllerService } from './shared_service/categoryCon
     {
       path:'login',
       component:LoginComponent
+    },
+    {
+      path:'reset-user-password',
+      component:ResetUserPasswordComponent
     },
     {
       path:'list-all-users',
@@ -112,7 +117,8 @@ import { ListAllCategoriesControllerService } from './shared_service/categoryCon
     EditCompanyDetailsComponent,
     ListAllProductsComponent,
     AddProductComponent,
-    EditProductDetailsComponent
+    EditProductDetailsComponent,
+    ResetUserPasswordComponent
   ],
   imports: [
     BrowserModule,
