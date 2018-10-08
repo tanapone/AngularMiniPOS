@@ -38,3 +38,8 @@ html {
     width: 60px;
     height: 34px;
 }
+
+.modal-dialog{
+    margin-top:15%!important;
+    max-width: 1000px!important;
+}

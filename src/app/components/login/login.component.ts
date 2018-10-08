@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
     passwordRequied:false,
     wrongAuthMessage:''
   }
-
+  model;
   constructor(private loginController : LoginControllerService,private localSt:LocalStorageService) { }
 
      verifyLogin(){

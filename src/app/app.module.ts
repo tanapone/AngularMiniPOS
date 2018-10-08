@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { Ng2Webstorage } from 'ngx-webstorage';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from 'angular-custom-modal'
+import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 //Component
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -26,6 +27,7 @@ import { ListAllProductsComponent } from './components/list-all-products/list-al
 import { AddProductComponent } from './components/add-product/add-product.component';
 import { EditProductDetailsComponent } from './components/edit-product-details/edit-product-details.component';
 import { ResetUserPasswordComponent } from './components/reset-user-password/reset-user-password.component';
+import { ListLowStockComponent } from './components/list-low-stock/list-low-stock.component';
 //Service
 import { WsTaskService } from './shared_service/ws-task.service';
 import { LoginControllerService } from './shared_service/loginControllers/login-controller.service'
@@ -33,6 +35,9 @@ import { ListAllUserControllerService } from './shared_service/userControllers/l
 import { AddUserContollerService } from './shared_service/userControllers/add-user-contoller.service';
 import { RemoveUserControllerService } from './shared_service/userControllers/remove-user-controller.service';
 import { ListAllCategoriesControllerService } from './shared_service/categoryControllers/list-all-categories-controller.service';
+import { ListAllInvoiceComponent } from './components/list-all-invoice/list-all-invoice.component';
+import { UpdateStockComponent } from './components/update-stock/update-stock.component';
+
 
 
 
@@ -97,6 +102,10 @@ import { ListAllCategoriesControllerService } from './shared_service/categoryCon
     {
       path:'edit/product/:id',
       component:EditProductDetailsComponent
+    },
+    {
+      path:'list-all-low-stock',
+      component:ListLowStockComponent
     }
   ]
 
@@ -118,11 +127,15 @@ import { ListAllCategoriesControllerService } from './shared_service/categoryCon
     ListAllProductsComponent,
     AddProductComponent,
     EditProductDetailsComponent,
-    ResetUserPasswordComponent
+    ResetUserPasswordComponent,
+    ListLowStockComponent,
+    ListAllInvoiceComponent,
+    UpdateStockComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
+    NgbModule,
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
@@ -136,7 +149,8 @@ import { ListAllCategoriesControllerService } from './shared_service/categoryCon
     ListAllUserControllerService,
     AddUserContollerService,
     RemoveUserControllerService,
-    ListAllCategoriesControllerService
+    ListAllCategoriesControllerService,
+
   ],
   bootstrap: [AppComponent]
 })

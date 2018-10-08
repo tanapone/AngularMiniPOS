@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ListAllProductsControllerService } from 'src/app/shared_service/productControllers/list-all-products-controller.service';
 import { Product } from 'src/app/entity/product';
 import { RemoveProductControllerService } from 'src/app/shared_service/productControllers/remove-product-controller.service'
+
 @Component({
   selector: 'app-list-all-products',
   templateUrl: './list-all-products.component.html',

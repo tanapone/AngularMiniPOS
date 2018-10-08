@@ -1,0 +1,126 @@
+<app-navbar></app-navbar>
+<div class="container-fluid">
+    <div class="container">
+        <div style="margin-top:6em">
+            <Button class="btn btn-outline-primary" style="float:right" (click)="showproductsWantToPurchasedModal()">
+         สร้างใบสังซื้อสินค้า
+        </Button>
+            <h2>รายการสินค้าที่เหลือน้อย</h2>
+            <div class="alert alert-danger" role="alert" *ngIf="products.length<1; else foundProducts" style="text-align:center;">
+                ไม่พบข้อมูลสินค้าที่เหลือน้อย
+            </div>
+            <ng-template #foundProducts>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ลำดับที่</th>
+                            <th>ชื่อสินค้า</th>
+                            <th>จำนวนสินค้าคงเหลือ</th>
+                            <th>จัดการ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let product of products; index as i">
+                            <td>{{ i+1 }}</td>
+                            <td>{{ product.getProductName() }}</td>
+                            <td>{{ product.getProductQty() }} ชิ้น</td>
+                            <td>
+                                <Button class="btn btn-outline-primary" (click)="addProductToPurchased(product)">
+                                  เพิ่มสินค้า
+                                </Button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </ng-template>
+          
+            <h2>รายการสินค้าที่ต้องการสั่งซื้อ</h2>
+            <div class="alert alert-danger" role="alert" *ngIf="invoiceDetails.length<1; else productsWantToPurchasedTable" style="text-align:center;">
+                ยังไม่มีรายการสินค้าที่ต้องการสั่งซื้อ
+            </div>
+            <ng-template #productsWantToPurchasedTable>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ลำดับที่</th>
+                            <th>ชื่อสินค้า</th>
+                            <th>จำนวนสินค้าคงเหลือ</th>
+                            <th>จัดการ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let invoiceDetail of invoiceDetails; index as i">
+                            <td>{{ i+1 }}</td>
+                            <td>{{ invoiceDetail.getProduct().getProductName() }}</td>
+                            <td>{{ invoiceDetail.getProduct().getProductQty() }} ชิ้น</td>
+                            <td>
+                                <Button class="btn btn-outline-danger" (click)="removeProductToPurchased(invoiceDetail.getProduct())">
+                                  ลบสินค้า
+                                </Button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </ng-template>
+            <modal #productsWantToPurchasedModal>
+                <ng-template #modalHeader>
+                    <h4>สร้างใบสังซื้อสินค้า</h4>
+                </ng-template>
+                <ng-template #modalBody>
+                  <h2>รายการสินค้าที่ต้องการสั่งซื้อ</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ลำดับที่</th>
+                                <th>ชื่อสินค้า</th>
+                                <th>จำนวนสินค้านำเข้า</th>
+                                <th>วันที่สินค้าเข้า</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let invoiceDetail of invoiceDetails; index as i">
+                                <td>{{ i+1 }}</td>
+                                <td>{{ invoiceDetail.getProduct().getProductName() }}</td>
+                                <td>
+                                  <input input type="text" pattern="\d*" maxlength="4" class="form-control" 
+                                  style="max-width: 100%;text-align:center;"
+                                  [(ngModel)]="invoiceDetail.quantity"/>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                          <input class="form-control" placeholder="yyyy-mm-dd"
+                                                 name="dp" [(ngModel)]="invoiceDetail.productInDate" ngbDatepicker #d="ngbDatepicker">
+                                          <div class="input-group-append">
+                                            <button class="btn " (click)="d.toggle()" type="button">
+                                              <i class="">ss</i>
+                                            </button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </ng-template>
+                <ng-template #modalFooter>
+                    <button class="btn btn-outline-danger" (click)="productsWantToPurchasedModal.close()">ยกเลิก</button>
+                    <button class="btn btn-outline-primary" (click)="testM()">สร้างใบสังซื้อสินค้า</button>
+                </ng-template>
+            </modal>
+
+            <modal #errModal>
+                <ng-template #modalHeader>
+                    <h4>คำเตือน</h4>
+                </ng-template>
+                <ng-template #modalBody>
+                    {{ errMsg }}
+                </ng-template>
+                <ng-template #modalFooter>
+                    <button class="btn btn-outline-primary" (click)="errModal.close()">ตกลง</button>
+                </ng-template>
+            </modal>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>
