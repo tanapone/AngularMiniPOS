@@ -3,7 +3,7 @@ import { InvoiceDetail } from "./invoice-detail";
 export class Invoice {
   private id: Number;
   private date: Date;
-  private sumPrice;
+  private sumPrice:Number;
   private invoiceDetails:Array<InvoiceDetail>;
     
   public getId(): Number {
@@ -22,11 +22,11 @@ export class Invoice {
     this.date = date;
   }
 
-  public getSumPrice(): undefined {
+  public getSumPrice(): Number {
     return this.sumPrice;
   }
 
-  public setSumPrice(sumPrice: undefined): void {
+  public setSumPrice(sumPrice: Number): void {
     this.sumPrice = sumPrice;
   }
   

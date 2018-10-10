@@ -28,6 +28,8 @@ import { AddProductComponent } from './components/add-product/add-product.compon
 import { EditProductDetailsComponent } from './components/edit-product-details/edit-product-details.component';
 import { ResetUserPasswordComponent } from './components/reset-user-password/reset-user-password.component';
 import { ListLowStockComponent } from './components/list-low-stock/list-low-stock.component';
+import { ListAllInvoiceComponent } from './components/list-all-invoice/list-all-invoice.component';
+import { UpdateStockComponent } from './components/update-stock/update-stock.component';
 //Service
 import { WsTaskService } from './shared_service/ws-task.service';
 import { LoginControllerService } from './shared_service/loginControllers/login-controller.service'
@@ -35,11 +37,6 @@ import { ListAllUserControllerService } from './shared_service/userControllers/l
 import { AddUserContollerService } from './shared_service/userControllers/add-user-contoller.service';
 import { RemoveUserControllerService } from './shared_service/userControllers/remove-user-controller.service';
 import { ListAllCategoriesControllerService } from './shared_service/categoryControllers/list-all-categories-controller.service';
-import { ListAllInvoiceComponent } from './components/list-all-invoice/list-all-invoice.component';
-import { UpdateStockComponent } from './components/update-stock/update-stock.component';
-
-
-
 
   const appRoutes:Routes=[
     {
@@ -106,6 +103,14 @@ import { UpdateStockComponent } from './components/update-stock/update-stock.com
     {
       path:'list-all-low-stock',
       component:ListLowStockComponent
+    },
+    {
+      path:'list-all-invoice',
+      component:ListAllInvoiceComponent
+    },
+    {
+      path:'update-stock/:id',
+      component:UpdateStockComponent
     }
   ]
 

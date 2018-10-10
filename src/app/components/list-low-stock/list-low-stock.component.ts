@@ -3,6 +3,7 @@ import { Product } from 'src/app/entity/product';
 import { Invoice } from 'src/app/entity/invoice';
 import { InvoiceDetail } from 'src/app/entity/invoice-detail';
 import { ListLowStockControllerService } from 'src/app/shared_service/productControllers/list-low-stock-controller.service';
+import { CreateInvoiceControllerService } from 'src/app/shared_service/invoiceControllers/create-invoice-controller.service';
 
 @Component({
   selector: 'app-list-low-stock',
@@ -18,9 +19,9 @@ export class ListLowStockComponent implements OnInit {
   invoice = new Invoice();
   invoiceDetails = new Array<InvoiceDetail>();
   errMsg:string = '';
-  sumPrice:Number;
+  sumPrice:0;
 
-  constructor(private listLowStockController:ListLowStockControllerService) { }
+  constructor(private listLowStockController:ListLowStockControllerService,private createInvoiceController:CreateInvoiceControllerService) { }
 
   showproductsWantToPurchasedModal(){
     if(this.invoiceDetails.length<1){
@@ -28,11 +29,10 @@ export class ListLowStockComponent implements OnInit {
       this.errModal.open();
     }else{
       this.productsWantToPurchasedModal.open()
+    this.setInitInvoiceQty();
+    //set sum capital price
+    this.sumCapitalPrice();
     }
-  }
-
-  sumTotalPrice(total,price){
-    return total + price
   }
 
   addProductToPurchased(product:Product){
@@ -62,10 +62,32 @@ export class ListLowStockComponent implements OnInit {
       newDate = invoiceDetailJson.year+'-'+invoiceDetailJson.month+'-'+invoiceDetailJson.day
       invoiceDetail.setProductInDate(new Date(newDate));
     })
-   
+
+  }
+
+  sumCapitalPrice(){
+  //loop set sumPrice
+    this.sumPrice=0;
+    for(let invoiceDetail of this.invoiceDetails){
+      let capitalPrice = invoiceDetail.getProduct().getProductCapitalPrice();
+      let sumCapitalPriceWithQty = (capitalPrice*invoiceDetail.getQuantity());
+      this.sumPrice += sumCapitalPriceWithQty;
+    }
+
   }
 
   createInvoice(){
+    //convert date json to string and set
+    this.settingDateInvoiceDetail();
+    //set invoiceDetails to invoice
+    this.invoice.setInvoiceDetails(this.invoiceDetails);
+    //set sum capital price
+    this.sumCapitalPrice();
+    this.invoice.setSumPrice(this.sumPrice);
+  
+    this.createInvoiceController.createInvoice(this.invoice).then((res:any)=>{
+    })
+
 
   }
 
@@ -73,6 +95,14 @@ export class ListLowStockComponent implements OnInit {
     this.listLowStockController.getLowStock().then((res:Product[])=>{
       this.products = res;
     })
+  }
+
+  setInitInvoiceQty(){
+    for(let invoiceDetail of this.invoiceDetails){
+      if(invoiceDetail.getQuantity()==null){
+        invoiceDetail.setQuantity(1);
+      }
+    }
   }
 
   ngOnInit() {

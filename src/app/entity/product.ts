@@ -1,22 +1,22 @@
 import { Category } from "./category";
 import { Company } from "./company";
 export class Product {
-  private id: Number;
+  private id: number;
   private productName: String;
   private productBarcodeID: String;
-  private productCapitalPrice: Number;
-  private productSalePrice: Number;
-  private productMinimum: Number;
-  private productQty: Number;
+  private productCapitalPrice: number;
+  private productSalePrice: number;
+  private productMinimum: number;
+  private productQty: number;
   private company: Company;
   private category: Category;
   private productStatus: boolean;
 
-	public getId(): Number {
+	public getId(): number {
 		return this.id;
 	}
 
-	public setId(id: Number): void {
+	public setId(id: number): void {
 		this.id = id;
 	}
 
@@ -36,35 +36,35 @@ export class Product {
 		this.productBarcodeID = productBarcodeID;
 	}
 
-	public getProductCapitalPrice(): Number {
+	public getProductCapitalPrice(): number {
 		return this.productCapitalPrice;
 	}
 
-	public setProductCapitalPrice(productCapitalPrice: Number): void {
+	public setProductCapitalPrice(productCapitalPrice: number): void {
 		this.productCapitalPrice = productCapitalPrice;
 	}
 
-	public getProductSalePrice(): Number {
+	public getProductSalePrice(): number {
 		return this.productSalePrice;
 	}
 
-	public setProductSalePrice(productSalePrice: Number): void {
+	public setProductSalePrice(productSalePrice: number): void {
 		this.productSalePrice = productSalePrice;
 	}
 
-	public getProductMinimum(): Number {
+	public getProductMinimum(): number {
 		return this.productMinimum;
 	}
 
-	public setProductMinimum(productMinimum: Number): void {
+	public setProductMinimum(productMinimum: number): void {
 		this.productMinimum = productMinimum;
 	}
 
-	public getProductQty(): Number {
+	public getProductQty(): number {
 		return this.productQty;
 	}
 
-	public setProductQty(productQty: Number): void {
+	public setProductQty(productQty: number): void {
 		this.productQty = productQty;
 	}
 

@@ -2,7 +2,7 @@ import { Product } from './product';
 
 export class InvoiceDetail {
     private product:Product;
-    private quantity:Number;
+    private quantity:number;
     private productInDate:Date = new Date();
     
     public InvoiceDetail(){
@@ -17,11 +17,11 @@ export class InvoiceDetail {
 		this.product = product;
 	}
 
-	public getQuantity(): Number {
+	public getQuantity(): number {
 		return this.quantity;
 	}
 
-	public setQuantity(quantity: Number): void {
+	public setQuantity(quantity: number): void {
 		this.quantity = quantity;
 	}
 

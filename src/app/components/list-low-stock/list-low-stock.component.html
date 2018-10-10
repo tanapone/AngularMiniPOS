@@ -84,16 +84,20 @@
                                 <td>
                                   <input input type="text" pattern="\d*" maxlength="4" class="form-control" 
                                   style="max-width: 100%;text-align:center;"
-                                  [(ngModel)]="invoiceDetail.quantity"/>
+                                  [(ngModel)]="invoiceDetail.quantity"
+                                  (input)="sumCapitalPrice()"/>
                                 </td>
                                 <td>
                                     <div class="form-group">
                                         <div class="input-group">
+
                                           <input class="form-control" placeholder="yyyy-mm-dd"
-                                                 name="dp" [(ngModel)]="invoiceDetail.productInDate" ngbDatepicker #d="ngbDatepicker">
+                                                 name="dp" [(ngModel)]="invoiceDetail.productInDate" 
+                                                 ngbDatepicker #d="ngbDatepicker">
+
                                           <div class="input-group-append">
                                             <button class="btn " (click)="d.toggle()" type="button">
-                                              <i class="">ss</i>
+                                                <i class="fas fa-calendar-alt"></i>
                                             </button>
                                           </div>
                                         </div>
@@ -102,10 +106,11 @@
                             </tr>
                         </tbody>
                     </table>
+                    <span>ราคารวม : {{ sumPrice }}</span>
                 </ng-template>
                 <ng-template #modalFooter>
                     <button class="btn btn-outline-danger" (click)="productsWantToPurchasedModal.close()">ยกเลิก</button>
-                    <button class="btn btn-outline-primary" (click)="testM()">สร้างใบสังซื้อสินค้า</button>
+                    <button class="btn btn-outline-primary" (click)="createInvoice()">สร้างใบสังซื้อสินค้า</button>
                 </ng-template>
             </modal>
 
