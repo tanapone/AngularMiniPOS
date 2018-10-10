@@ -4,6 +4,7 @@ export class InvoiceDetail {
     private product:Product;
     private quantity:number;
     private productInDate:Date = new Date();
+	private productIn:boolean;
     
     public InvoiceDetail(){
         this.quantity = 0;
@@ -33,4 +34,11 @@ export class InvoiceDetail {
 		this.productInDate = productInDate;
 	}
 
+	public isProductIn(): boolean {
+		return this.productIn;
+	}
+
+	public setProductIn(productIn: boolean): void {
+		this.productIn = productIn;
+	}
 }

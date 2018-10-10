@@ -1,3 +1,53 @@
-<p>
-  list-all-invoice works!
-</p>
+<app-navbar></app-navbar>
+<div class="container-fluid">
+    <div class="container">
+        <div style="margin-top:6em">
+            <h2>รายการใบสั่งซื้อ</h2>
+            <div class="alert alert-danger" role="alert" *ngIf="invoices.length<1; else foundInvoices" style="text-align:center;">
+                ไม่พบข้อมูลรายการสั่งซื้อสินค้า
+            </div>
+            <ng-template #foundInvoices>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>หมายเลขใบสั่งซื้อ</th>
+                            <th>ทำรายการวันที่</th>
+                            <th>จำนวนสินค้า</th>
+                            <th>จัดการ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let invoice of invoices; index as i">
+                            <td>{{ invoice.getId() }}</td>
+                            <td>{{ invoice.getDate() }}</td>
+                            <td>{{ invoice.getInvoiceDetails().length }} ชิ้น</td>
+                            <td>
+                                <a [routerLink]="['/edit/company/'+invoice.getId()]">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                                |
+                                <a (click)="confirmRemoveModal.open()">
+                                    <i class="fa fa-trash-alt"></i>
+                                </a>
+                                <modal #confirmRemoveModal>
+                                    <ng-template #modalHeader>
+                                        <h4>คำเตือน</h4>
+                                    </ng-template>
+                                    <ng-template #modalBody>
+                                        คุณต้องการลบบริษัท {{ company.getCompanyName() }} ใช่หรือไม่
+                                    </ng-template>
+                                    <ng-template #modalFooter>
+                                        <button class="btn btn-outline-danger" (click)="confirmRemoveModal.close()">ยกเลิก</button>
+                                        <button class="btn btn-outline-primary" (click)="confirmRemoveModal.close()">ยืนยันการลบ</button>
+                                    </ng-template>
+                                </modal>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </ng-template>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

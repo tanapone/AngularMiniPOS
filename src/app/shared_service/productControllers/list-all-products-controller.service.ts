@@ -42,7 +42,6 @@ export class ListAllProductsControllerService {
           resProduct.setCompany(resCompany)
 
         products.push(resProduct)
-        console.log(JSON.stringify(resProduct))
       }
       return products
     },error=>{

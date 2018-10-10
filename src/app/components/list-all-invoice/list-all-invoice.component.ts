@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ListAllInvoiceControllerService } from 'src/app/shared_service/invoiceControllers/list-all-invoice-controller.service';
+import { Invoice } from 'src/app/entity/invoice';
 
 @Component({
   selector: 'app-list-all-invoice',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListAllInvoiceComponent implements OnInit {
 
-  constructor() { }
+  private invoices = new Array<Invoice>();
+  constructor(private listAllInvoiceController:ListAllInvoiceControllerService) { }
+  
+  getAllInvoices(){
+    this.listAllInvoiceController.getAllInvoices().then((res:Invoice[])=>{
+      this.invoices = res;
+    })
+  }
 
   ngOnInit() {
+    this.getAllInvoices();
   }
 
 }
