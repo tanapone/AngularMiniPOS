@@ -12,7 +12,8 @@
                         <tr>
                             <th>หมายเลขใบสั่งซื้อ</th>
                             <th>ทำรายการวันที่</th>
-                            <th>จำนวนสินค้า</th>
+                            <th>รายการสินค้า</th>
+                            <th>สถานะ</th>
                             <th>จัดการ</th>
                         </tr>
                     </thead>
@@ -20,28 +21,19 @@
                         <tr *ngFor="let invoice of invoices; index as i">
                             <td>{{ invoice.getId() }}</td>
                             <td>{{ invoice.getDate() }}</td>
-                            <td>{{ invoice.getInvoiceDetails().length }} ชิ้น</td>
+                            <td>{{ invoice.getInvoiceDetails().length }} รายการ</td>
                             <td>
-                                <a [routerLink]="['/edit/company/'+invoice.getId()]">
-                                    <i class="fa fa-edit"></i>
+                             <span *ngIf="checkProductIn(invoice)=='ดำเนินการสำเร็จ'" style="background-color:green;color:white;padding:5px">
+                                  {{ checkProductIn(invoice) }}
+                             </span>   
+                             <span *ngIf="checkProductIn(invoice)=='รอการดำเนินการ'" style="background-color:orange;color:white;padding:5px">
+                                    {{ checkProductIn(invoice) }}
+                               </span>   
+                            </td>
+                            <td>
+                                <a class="btn btn-outline-primary" [routerLink]="['/update-stock/'+invoice.getId()]">
+                                    จัดการใบสั่งซื้อ
                                 </a>
-                                |
-                                <a (click)="confirmRemoveModal.open()">
-                                    <i class="fa fa-trash-alt"></i>
-                                </a>
-                                <modal #confirmRemoveModal>
-                                    <ng-template #modalHeader>
-                                        <h4>คำเตือน</h4>
-                                    </ng-template>
-                                    <ng-template #modalBody>
-                                        คุณต้องการลบบริษัท {{ company.getCompanyName() }} ใช่หรือไม่
-                                    </ng-template>
-                                    <ng-template #modalFooter>
-                                        <button class="btn btn-outline-danger" (click)="confirmRemoveModal.close()">ยกเลิก</button>
-                                        <button class="btn btn-outline-primary" (click)="confirmRemoveModal.close()">ยืนยันการลบ</button>
-                                    </ng-template>
-                                </modal>
-
                             </td>
                         </tr>
                     </tbody>

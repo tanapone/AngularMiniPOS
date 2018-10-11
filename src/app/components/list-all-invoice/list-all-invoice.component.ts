@@ -18,6 +18,23 @@ export class ListAllInvoiceComponent implements OnInit {
     })
   }
 
+  checkProductIn(invoice:Invoice):string{
+    let allProductIn:boolean = true;
+    let reusultText:string ='';
+    for(let invoiceDetail of invoice.getInvoiceDetails()){
+      if(invoiceDetail.isProductIn()!=true){
+        allProductIn = false;
+        break;
+      }
+    }
+    if(allProductIn){
+      reusultText = 'ดำเนินการสำเร็จ';
+    }else{
+      reusultText = 'รอการดำเนินการ'
+    }
+    return reusultText;
+  }
+
   ngOnInit() {
     this.getAllInvoices();
   }

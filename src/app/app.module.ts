@@ -9,6 +9,7 @@ import { Ng2Webstorage } from 'ngx-webstorage';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from 'angular-custom-modal'
 import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { DatePipe } from '@angular/common';
 //Component
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -155,6 +156,7 @@ import { ListAllCategoriesControllerService } from './shared_service/categoryCon
     AddUserContollerService,
     RemoveUserControllerService,
     ListAllCategoriesControllerService,
+    DatePipe
 
   ],
   bootstrap: [AppComponent]

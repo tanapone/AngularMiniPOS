@@ -1,3 +1,49 @@
-<p>
-  update-stock works!
-</p>
+<app-navbar></app-navbar>
+<div class="container-fluid">
+    <div style="margin-top:6em">
+        <div class="row justify-content-center">
+            <div class="col-md-12 update-invoice-form">
+              <h2 style="text-align:center">ใบรายการสั่งซื้อที่ {{ invoice.id }}</h2>
+                <div class="alert alert-danger" role="alert" *ngIf="invoice.id==undefined; else editCategoryForm" style="margin-top:1em;text-align:center;">
+                    ไม่พบข้อมูลใบสั่งซื้อ
+                </div>
+                
+
+                <ng-template #editCategoryForm>
+                  <div class="row justify-content-center" style="margin-top:3em">
+                  <div class="col-md-8">
+                    <h2>รายการสินค้าที่อยู่ในใบสั่งซื้อ</h2>
+                    <table class="table">
+                      <thead>
+                        <th>ชื่อสินค้า</th>
+                        <th>จำนวนสินค้าคงเหลือ</th>
+                        <th>จำนวนสินค้านำเข้า</th>
+                        <th>วันที่คาดว่าสินค้าจะเข้า</th>
+                        <th>สถานะนำเข้าสินค้า</th>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let invoiceDetail of invoice.invoiceDetails">
+                          <td>{{ invoiceDetail.product.productName }}</td>
+                          <td>{{ invoiceDetail.product.productQty }}&nbsp;ชิ้น</td>
+                          <td>{{ invoiceDetail.quantity }}&nbsp;ชิ้น</td>
+                          <td>{{ invoiceDetail.productInDate }}</td>
+                          <td>
+                            <label class="switch">
+                              <input type="checkbox" [checked]="invoiceDetail.productIn"
+                              [disabled]="invoiceDetail.productIn"
+                              [(ngModel)]="invoiceDetail.productIn">
+                              <span class="slider round"></span>
+                            </label>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <button type="submit" class="btn btn-outline-primary" style="margin-top:1em;float:right" (click)="updateInvoice()">บันทึกใบสั่งซื้อ</button>
+                  </div>
+                </div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>
