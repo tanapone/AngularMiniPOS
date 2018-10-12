@@ -26,6 +26,7 @@ export class ListAllUserControllerService {
         resUser.setEmail(user.email)
         resUser.setAddress(user.address)
         resUser.setPhoneNumber(user.phoneNumber)
+        resUser.setUserStatus(user.userStatus)
         users.push(resUser)
       }
       return users

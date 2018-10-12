@@ -26,6 +26,7 @@ export class AddUserComponent implements OnInit {
     user.setPhoneNumber(form.value.phoneNumber)
     user.setUserType(form.value.userType)
     user.setAddress(form.value.address)
+    user.setUserStatus(form.value.userStatus)
     this.addUserController.addUser(user).then((res:any)=>{
       if(res){
       let responseData = JSON.parse(res)
@@ -50,6 +51,7 @@ export class AddUserComponent implements OnInit {
       email: new FormControl('',[Validators.required,Validators.email]),
       phoneNumber: new FormControl('',[Validators.required,Validators.pattern('[0-9]*'),Validators.minLength(9),Validators.maxLength(10)]),
       address: new FormControl('',Validators.required),
+      userStatus: new FormControl(''),
       userType: new FormControl('',Validators.required)
     })
   }

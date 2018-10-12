@@ -16,6 +16,7 @@
                             <th>ลำดับที่</th>
                             <th>ชื่อบัญชี</th>
                             <th>อีเมล</th>
+                            <th>สถานะผู้ใช้</th>
                             <th>จัดการ</th>
                         </tr>
                     </thead>
@@ -24,6 +25,7 @@
                             <td>{{ i+1 }}</td>
                             <td>{{ user.getUsername() }}</td>
                             <td>{{ user.getEmail() }}</td>
+                            <td>{{ checkUserStatus(user) }}</td>
                             <td>
                                 <a [routerLink]="['/edit/user/'+user.getId()]">
                                     <i class="fa fa-edit"></i>

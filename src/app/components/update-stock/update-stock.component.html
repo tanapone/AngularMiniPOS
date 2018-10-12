@@ -22,15 +22,16 @@
                         <th>สถานะนำเข้าสินค้า</th>
                       </thead>
                       <tbody>
-                        <tr *ngFor="let invoiceDetail of invoice.invoiceDetails">
+                        <tr *ngFor="let invoiceDetail of invoice.invoiceDetails;index as i">
                           <td>{{ invoiceDetail.product.productName }}</td>
                           <td>{{ invoiceDetail.product.productQty }}&nbsp;ชิ้น</td>
                           <td>{{ invoiceDetail.quantity }}&nbsp;ชิ้น</td>
                           <td>{{ invoiceDetail.productInDate }}</td>
                           <td>
+                            <!-- if productIn -->
                             <label class="switch">
                               <input type="checkbox" [checked]="invoiceDetail.productIn"
-                              [disabled]="invoiceDetail.productIn"
+                              [disabled]="isProductInDefault[i]"
                               [(ngModel)]="invoiceDetail.productIn">
                               <span class="slider round"></span>
                             </label>
@@ -38,9 +39,25 @@
                         </tr>
                       </tbody>
                     </table>
-                    <button type="submit" class="btn btn-outline-primary" style="margin-top:1em;float:right" (click)="updateInvoice()">บันทึกใบสั่งซื้อ</button>
+                   
+                        <h3 style="text-align:right">ราคารวม {{ invoice.sumPrice }} บาท</h3>
+                    
+                    <button type="submit" class="btn btn-outline-primary" style="margin-top:1em;float:right" (click)="confirmUpdateStock.open()">บันทึกใบสั่งซื้อ</button>
+                    <button type="submit" class="btn btn-outline-danger" style="margin-top:1em;float:right;margin-right:1em;" (click)="reset()">รีเซ็ต</button>
                   </div>
                 </div>
+                <modal #confirmUpdateStock>
+                    <ng-template #modalHeader>
+                        <h4>คำเตือน</h4>
+                    </ng-template>
+                    <ng-template #modalBody>
+                        คุณต้องการที่จะบันทึกใบสั่งซื้อสินค้าใช่หรือไม่ ขั้นตอนนี้ไม่สามารถกลับมาแก้ไขได้เนื่องจากมีต่อสินค้าในคลัง
+                    </ng-template>
+                    <ng-template #modalFooter>
+                        <button class="btn btn-outline-danger" (click)="confirmRemoveModal.close()">ยกเลิก</button>
+                        <button class="btn btn-outline-primary" (click)="updateInvoice()">ตกลง</button>
+                    </ng-template>
+                </modal>
                 </ng-template>
             </div>
         </div>

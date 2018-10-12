@@ -38,6 +38,8 @@ export class LoginComponent implements OnInit {
             this.errorMsg.wrongAuthMessage = 'คุณไม่มีสิทธิ์ใช้งานในส่วนนี้'
           }else if(responseData.message=='Wrong username or password.'){
             this.errorMsg.wrongAuthMessage = 'ชื่อบัญชี หรือ รหัสผ่านไม่ถูกต้อง'
+          }else if(responseData.message=='Your account was closed.'){
+            this.errorMsg.wrongAuthMessage = 'ชื่อบัญชี ของคุณถูกปิดการใช้งาน ไม่สามารถเข้าสู่ระบบได้'
           }
         }
         console.log(responseData)

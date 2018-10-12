@@ -54,6 +54,7 @@ export class EditUserDetailsComponent implements OnInit {
       email: new FormControl('',[Validators.required,Validators.email]),
       phoneNumber: new FormControl('',[Validators.required,Validators.pattern('[0-9]*'),Validators.minLength(9),Validators.maxLength(10)]),
       address: new FormControl('',Validators.required),
+      userStatus: new FormControl(''),
       userType: new FormControl('',Validators.required)
     })
     this.id = this.route.snapshot.params['id']

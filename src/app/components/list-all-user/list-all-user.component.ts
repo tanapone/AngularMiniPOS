@@ -20,6 +20,16 @@ export class ListAllUserComponent implements OnInit {
     })
   }
 
+  checkUserStatus(user:User):string{
+    let result:string;
+    if(user.isUserStatus()==true){
+      result = 'เปิดการใช้งาน'
+    }else{
+      result = 'ปิดการใช้งาน'
+    }
+    return result;
+  }
+
   removeUser(id:Number){
     this.removeUserController.removeUser(id).then((res:any)=>{
       this.getAllUsers()

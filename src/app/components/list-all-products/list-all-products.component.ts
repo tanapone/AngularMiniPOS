@@ -39,6 +39,16 @@ export class ListAllProductsComponent implements OnInit {
     })
   }
 
+  checkProductStatus(product:Product):string{
+    let result:string;
+    if(product.getProductStatus()==true){
+      result = 'สินค้ายังคงขายอยู่'
+    }else{
+      result = 'ไม่มีการขายสินค้านี้แล้ว'
+    }
+    return result;
+  }
+
   ngOnInit() {
     this. getAllProducts()
   }

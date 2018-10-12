@@ -21,44 +21,46 @@ export class UpdateStockControllerService {
       console.log('/invoice/'+id+'?autheKey='+this.localSt.retrieve('authKey'))
       let responseData = data;
       let resInvoice = new Invoice();
-      resInvoice.setId(responseData.id);
-      resInvoice.setDate(responseData.invoiceDate);
-      resInvoice.setSumPrice(responseData.sumPrice);
-      let resInvoiceDetails = new Array<InvoiceDetail>();
-      for(let invoiceDetail of responseData.invoiceDetails){
-        let resInvoiceDetail = new InvoiceDetail();
-        resInvoiceDetail.setProductInDate(invoiceDetail.productInDate);
-        resInvoiceDetail.setProductIn(invoiceDetail.productIn);
-        resInvoiceDetail.setQuantity(invoiceDetail.quantity);
-
-        let resProduct = new Product();
-        // Company
-        let resCompany = new Company();
-        resCompany.setId(invoiceDetail.product.company.id);
-        resCompany.setCompanyName(invoiceDetail.product.company.companyName);
-        resCompany.setCompanyAddress(invoiceDetail.product.company.companyAddress);
-        resCompany.setCompanyPhoneNumber(invoiceDetail.product.company.companyPhoneNumber);
-        resCompany.setCompanyEmail(invoiceDetail.product.company.companyEmail);
-       // Category
-        let resCategory = new Category();
-        resCategory.setId(invoiceDetail.product.category.id);
-        resCategory.setCategoryName(invoiceDetail.product.category.categoryName);
-        // Products
-        resProduct.setId(invoiceDetail.product.id);
-        resProduct.setProductName(invoiceDetail.product.productName);
-        resProduct.setProductBarcodeID(invoiceDetail.product.productBarcodeID);
-        resProduct.setProductCapitalPrice(invoiceDetail.product.productCapitalPrice);
-        resProduct.setProductSalePrice(invoiceDetail.product.productSalePrice);
-        resProduct.setProductMinimum(invoiceDetail.product.productMinimum);
-        resProduct.setProductQty(invoiceDetail.product.productQty);
-        // Set category and company
-        resProduct.setCategory(resCategory);
-        resProduct.setCompany(resCompany);
-        resInvoiceDetail.setProduct(resProduct);
-
-        resInvoiceDetails.push(resInvoiceDetail);
-        }
-      resInvoice.setInvoiceDetails(resInvoiceDetails);
+      if(responseData!=null){
+        resInvoice.setId(responseData.id);
+        resInvoice.setDate(responseData.invoiceDate);
+        resInvoice.setSumPrice(responseData.sumPrice);
+        let resInvoiceDetails = new Array<InvoiceDetail>();
+        for(let invoiceDetail of responseData.invoiceDetails){
+          let resInvoiceDetail = new InvoiceDetail();
+          resInvoiceDetail.setProductInDate(invoiceDetail.productInDate);
+          resInvoiceDetail.setProductIn(invoiceDetail.productIn);
+          resInvoiceDetail.setQuantity(invoiceDetail.quantity);
+  
+          let resProduct = new Product();
+          // Company
+          let resCompany = new Company();
+          resCompany.setId(invoiceDetail.product.company.id);
+          resCompany.setCompanyName(invoiceDetail.product.company.companyName);
+          resCompany.setCompanyAddress(invoiceDetail.product.company.companyAddress);
+          resCompany.setCompanyPhoneNumber(invoiceDetail.product.company.companyPhoneNumber);
+          resCompany.setCompanyEmail(invoiceDetail.product.company.companyEmail);
+         // Category
+          let resCategory = new Category();
+          resCategory.setId(invoiceDetail.product.category.id);
+          resCategory.setCategoryName(invoiceDetail.product.category.categoryName);
+          // Products
+          resProduct.setId(invoiceDetail.product.id);
+          resProduct.setProductName(invoiceDetail.product.productName);
+          resProduct.setProductBarcodeID(invoiceDetail.product.productBarcodeID);
+          resProduct.setProductCapitalPrice(invoiceDetail.product.productCapitalPrice);
+          resProduct.setProductSalePrice(invoiceDetail.product.productSalePrice);
+          resProduct.setProductMinimum(invoiceDetail.product.productMinimum);
+          resProduct.setProductQty(invoiceDetail.product.productQty);
+          // Set category and company
+          resProduct.setCategory(resCategory);
+          resProduct.setCompany(resCompany);
+          resInvoiceDetail.setProduct(resProduct);
+  
+          resInvoiceDetails.push(resInvoiceDetail);
+          }
+        resInvoice.setInvoiceDetails(resInvoiceDetails);
+      }
       return resInvoice;
     },error=>{
       console.log(error);

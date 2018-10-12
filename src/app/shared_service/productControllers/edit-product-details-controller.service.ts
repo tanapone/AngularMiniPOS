@@ -40,6 +40,7 @@ export class EditProductDetailsControllerService {
           // Set category and company
           resProduct.setCategory(resCategory)
           resProduct.setCompany(resCompany)
+
           console.log(resProduct)
           return resProduct
       },error=>{

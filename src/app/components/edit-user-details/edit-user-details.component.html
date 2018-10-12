@@ -59,6 +59,12 @@
                       <option value=0>พนักงาน</option>
                       <option value=1>ผู้จัดการ</option>
                     </select>
+                    <div class="row">
+                            <label class="form-check-label" style="padding-top:10px;padding-left:35px">
+                                <input class="form-check-input" type="checkbox" name="userStatus" [(ngModel)]="user.userStatus"
+                                 [checked]="user.userStatus" formControlName="userStatus"> สถานะผู้ใช้
+                            </label>
+                    </div>
                         <button type="submit" class="btn btn-outline-primary" style="margin-top:1em;float:right" [disabled]="form.invalid">บันทึกบัญชีผู้ใช้</button>
                     </form>
                 </ng-template>

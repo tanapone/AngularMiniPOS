@@ -31,6 +31,7 @@ import { ResetUserPasswordComponent } from './components/reset-user-password/res
 import { ListLowStockComponent } from './components/list-low-stock/list-low-stock.component';
 import { ListAllInvoiceComponent } from './components/list-all-invoice/list-all-invoice.component';
 import { UpdateStockComponent } from './components/update-stock/update-stock.component';
+import { ViewReportsComponent } from './components/view-reports/view-reports.component';
 //Service
 import { WsTaskService } from './shared_service/ws-task.service';
 import { LoginControllerService } from './shared_service/loginControllers/login-controller.service'
@@ -112,6 +113,10 @@ import { ListAllCategoriesControllerService } from './shared_service/categoryCon
     {
       path:'update-stock/:id',
       component:UpdateStockComponent
+    },
+    {
+      path:'view-reports',
+      component:ViewReportsComponent
     }
   ]
 
@@ -136,7 +141,8 @@ import { ListAllCategoriesControllerService } from './shared_service/categoryCon
     ResetUserPasswordComponent,
     ListLowStockComponent,
     ListAllInvoiceComponent,
-    UpdateStockComponent
+    UpdateStockComponent,
+    ViewReportsComponent
   ],
   imports: [
     BrowserModule,

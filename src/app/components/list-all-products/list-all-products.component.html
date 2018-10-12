@@ -16,6 +16,8 @@
                             <th>ลำดับที่</th>
                             <th>ชื่อสินค้า</th>
                             <th>จำนวนสินค้าคงเหลือ</th>
+                            <th>ประเภทสินค้า</th>
+                            <th>สถานะสินค้า</th>
                             <th>จัดการ</th>
                         </tr>
                     </thead>
@@ -24,6 +26,8 @@
                             <td>{{ i+1 }}</td>
                             <td>{{ product.getProductName() }}</td>
                             <td>{{ product.getProductQty() }} ชิ้น</td>
+                            <td>{{ product.getCategory().getCategoryName() }}</td>
+                            <td>{{ checkProductStatus(product) }}</td>
                             <td>
                                 <a [routerLink]="['/edit/product/'+product.getId()]">
                                     <i class="fa fa-edit"></i>

@@ -25,6 +25,7 @@ export class EditUserDetailsControllerService {
         user.setAddress(responseData.address)
         user.setAuthKey(responseData.authKey)
         user.setUserType(responseData.userType)
+        user.setUserStatus(responseData.userStatus)
       return user
     },error=>{
       console.log(error)

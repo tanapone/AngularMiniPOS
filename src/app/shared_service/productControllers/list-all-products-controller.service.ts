@@ -37,10 +37,11 @@ export class ListAllProductsControllerService {
           resProduct.setProductSalePrice(product.productSalePrice)
           resProduct.setProductMinimum(product.productMinimum)
           resProduct.setProductQty(product.productQty)
+          resProduct.setProductStatus(product.productStatus)
           // Set category and company
           resProduct.setCategory(resCategory)
           resProduct.setCompany(resCompany)
-
+          
         products.push(resProduct)
       }
       return products

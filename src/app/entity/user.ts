@@ -8,6 +8,7 @@ export class User {
   private email: String;
   private phoneNumber: String;
   private address: String;
+  private userStatus:boolean;
   private authKey: String;
 
 	public getId(): Number {
@@ -86,8 +87,17 @@ export class User {
 		return this.authKey;
 	}
 
+	public isUserStatus(): boolean {
+		return this.userStatus;
+	}
+
+	public setUserStatus(userStauts: boolean): void {
+		this.userStatus = userStauts;
+	}
+
 	public setAuthKey(authKey: String): void {
 		this.authKey = authKey;
 	}
+	
 
 }
