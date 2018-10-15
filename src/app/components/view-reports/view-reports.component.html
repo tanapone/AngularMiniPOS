@@ -1,3 +1,72 @@
-<p>
-  view-reports works!
-</p>
+<app-navbar></app-navbar>
+<div class="container">
+  <div id="top">
+    <div style style="margin-top:5em">
+      กรุณาเลือกวันที่ต้องการดูรายงานผลการขาย
+      <div class="col-md-3">
+        <div class="form-group">
+          <div class="input-group">
+            <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d="ngbDatepicker">
+            <div class="input-group-append">
+              <button class="btn " (click)="d.toggle()" type="button">
+                <i class="fas fa-calendar-alt"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="alert alert-danger" role="alert" *ngIf="orders.length<1; else showAllOrder" style="text-align:center;">
+    ไม่พบรายการ การสั่งซื้อ
+  </div>
+  <ng-template #showAllOrder>
+    <div class="capture">
+      <h2>รายงานผลการขาย {{ convertDateFormat(orders[0].getOrderDate()) }} จำนวน {{ orders.length }} รายการ</h2>
+    </div>
+    <div class="card" *ngFor="let order of orders" style="margin-top:1em;margin-bottom:1em;">
+      <div class="card-header bg-primary text-light">
+        หมายเลขออเดอร์ : {{ order.id }}
+      </div>
+      <div class="card-body">
+        <div>
+          <table class="table">
+            <thead>
+              <th>รหัสสินค้า</th>
+              <th>ชื่อสินค้า</th>
+              <th>จำนวนสินค้า</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let orderDetail of order.orderDetails">
+                <td>{{ orderDetail.product.id }}</td>
+                <td>{{ orderDetail.product.productName }}</td>
+                <td>{{ orderDetail.productAmount }} ชิ้น</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <hr />
+        <div style="text-align:right">
+          <h3>ราคารวม : <span style="color:orange">{{ order.sumPrice | number}}</span> บาท | กำไร : <span style="color:green">{{
+              order.profit | number}}</span> บาท</h3>
+          <h5>ผู้ทำรายการ : {{ order.user.firstName }}</h5>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:right">
+      <hr />
+      <h3>ราคารวมทั้งหมด : <span style="color:orange">{{ sumAllPrice() | number}}</span> บาท</h3>
+      <h3>กำไรรวมทั้งหมด : <span style="color:orangered">{{ sumAllProfit() | number}}</span> บาท</h3>
+      <h3>กำไรหักลบภาษี <span style="color:orange">7%</span> (<span style="color:maroon">{{(sumAllProfit()*0.07) | number}}</span>) : <span style="color:green">{{ sumAllProfit() -
+          (sumAllProfit()*0.07) | number}}</span> บาท</h3>
+    </div>
+<div class="row">
+  <div class="col-12" style="padding:10px">
+    <button class="btn btn-outline-primary float-right" (click)="gotoTop()">
+      กลับขึ้นไปด้านบน <i class="fas fa-chevron-up"></i>
+    </button>
+  </div>
+</div>
+</ng-template>
+</div>
+<app-footer></app-footer>

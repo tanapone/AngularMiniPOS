@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { ListAllProductsControllerService } from 'src/app/shared_service/productControllers/list-all-products-controller.service';
 import { Product } from 'src/app/entity/product';
 import { RemoveProductControllerService } from 'src/app/shared_service/productControllers/remove-product-controller.service'
@@ -10,6 +10,9 @@ import { RemoveProductControllerService } from 'src/app/shared_service/productCo
 })
 export class ListAllProductsComponent implements OnInit {
 
+  @ViewChild('confirmRemoveModal') confirmRemoveModal;
+  @ViewChild('errorModal') errorModal;
+  
   products = new Array<Product>();
   errModalMsg:string = ''
   constructor(private removeProductController:RemoveProductControllerService,private listAllProductController:ListAllProductsControllerService) { }
@@ -21,19 +24,23 @@ export class ListAllProductsComponent implements OnInit {
   }
 
   removeProduct(id:Number){
+    this.errModalMsg =''
     this.removeProductController.removeProduct(id).then((res:any)=>{
       if(res){
         let responseData = JSON.parse(res)
         if(responseData.message){
-          if(responseData.message=='This category still have products.'){
-            this.errModalMsg = 'ไม่สามารถลบประเภทสินค้านี้ได้เนื่องจากมีสินค้าใช้ประเภทสินค้านี้อยู่'
-          }else if(responseData.message=='no category detail.'){
-            this.errModalMsg = 'ไม่พบข้อมูลประเภทสินค้านี้ในระบบ'
+          if(responseData.message=='No product found.'){
+            this.errModalMsg = 'ไม่พบข้อมูลสินค้านี้ในระบบ'
+          }else if(responseData.message=='Product is in order please change product status.'){
+            this.errModalMsg = 'สินค้านี้ได้มีการทำการซื้อขายแล้ว กรุณาเปลี่ยนสถานะสินค้าแทน เนื่องจากจะมีผลกระทบต่อยอดขาย'
+          }else if(responseData.message=='Product is in invoice please change product status.'){
+            this.errModalMsg = 'สินค้านี้ได้มีการทำการสั่งซื้อแล้ว กรุณาเปลี่ยนสถานะสินค้าแทน เนื่องจากจะมีผลกระทบต่อยอดขาย'
           }
           if(this.errModalMsg!=''){
-            alert(this.errModalMsg)
+           alert(this.errModalMsg)
+          }else{
+            this.getAllProducts()
           }
-          this.getAllProducts()
       }
     }
     })

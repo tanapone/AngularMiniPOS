@@ -49,7 +49,7 @@
                                     </ng-template>
                                 </modal>
 
-                                <modal #errorRemoveModal>
+                                <modal #errorModal>
                                     <ng-template #modalHeader>
                                         <h4>เกิดข้อผิดพลาด</h4>
                                     </ng-template>
@@ -57,7 +57,7 @@
                                         {{ errModalMsg }}
                                     </ng-template>
                                     <ng-template #modalFooter>
-                                        <button class="btn btn-outline-danger" (click)="errorRemoveModal.close()">ยกเลิก</button>
+                                        <button class="btn btn-outline-danger" (click)="errorModal.close()">ยกเลิก</button>
                                     </ng-template>
                                 </modal>
 

@@ -15,14 +15,14 @@ export class ViewReportControllerService {
 
   constructor(private wsTask:WsTaskService,private localSt:LocalStorageService,private datePipe: DatePipe) { }
 
-  getInvoiceByDate(date:Date):Promise<Order[]|void>{
+  getOrderByDate(date:Date):Promise<Order[]|void>{
     let trasformedDate:string=null;
     trasformedDate = this.datePipe.transform(date,'yyyy-MM-dd');
-    console.log(trasformedDate)
     return this.wsTask.doGet('/order/'+trasformedDate+'?authKey='+this.localSt.retrieve('authKey')).then((data:any)=>{
       let responseData = data;
+      let orders = new Array<Order>();
       if(responseData!=null){
-        let orders = new Array<Order>();
+        
         for(let order of responseData){
           //Define order
           let resOrder = new Order();
@@ -46,7 +46,6 @@ export class ViewReportControllerService {
           //Define OrderDetail
           let orderDetails = new Array<OrderDetail>();
           for(let orderDetail of order.orderDetails){
-    
             let resOrderDetail = new OrderDetail();
             resOrderDetail.setProductAmount(orderDetail.productAmount);
             //Define product in order detail
@@ -78,12 +77,11 @@ export class ViewReportControllerService {
               orderDetails.push(resOrderDetail);
           }
           resOrder.setOrderDetails(orderDetails);
+          resOrder.setUser(user);
           orders.push(resOrder);
         }
-        console.log('responseData='+data)
-        console.log(orders)
-        return orders;
       }
+      return orders;
     },error=>{
       console.log(error);
     })

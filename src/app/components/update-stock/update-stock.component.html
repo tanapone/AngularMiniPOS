@@ -40,7 +40,7 @@
                       </tbody>
                     </table>
                    
-                        <h3 style="text-align:right">ราคารวม {{ invoice.sumPrice }} บาท</h3>
+                        <h3 style="text-align:right">ราคารวม <span style="color:green">{{ invoice.sumPrice | number}}</span> บาท</h3>
                     
                     <button type="submit" class="btn btn-outline-primary" style="margin-top:1em;float:right" (click)="confirmUpdateStock.open()">บันทึกใบสั่งซื้อ</button>
                     <button type="submit" class="btn btn-outline-danger" style="margin-top:1em;float:right;margin-right:1em;" (click)="reset()">รีเซ็ต</button>
@@ -51,10 +51,10 @@
                         <h4>คำเตือน</h4>
                     </ng-template>
                     <ng-template #modalBody>
-                        คุณต้องการที่จะบันทึกใบสั่งซื้อสินค้าใช่หรือไม่ ขั้นตอนนี้ไม่สามารถกลับมาแก้ไขได้เนื่องจากมีต่อสินค้าในคลัง
+                        คุณต้องการที่จะบันทึกใบสั่งซื้อสินค้าใช่หรือไม่ ขั้นตอนนี้ไม่สามารถกลับมาแก้ไขได้เนื่องจากมีผลต่อสินค้าในคลัง
                     </ng-template>
                     <ng-template #modalFooter>
-                        <button class="btn btn-outline-danger" (click)="confirmRemoveModal.close()">ยกเลิก</button>
+                        <button class="btn btn-outline-danger" (click)="confirmUpdateStock.close()">ยกเลิก</button>
                         <button class="btn btn-outline-primary" (click)="updateInvoice()">ตกลง</button>
                     </ng-template>
                 </modal>
