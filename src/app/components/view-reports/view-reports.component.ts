@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ViewReportControllerService } from 'src/app/shared_service/ViewReportControllers/view-report-controller.service';
 import { Order } from 'src/app/entity/order';
 import { DatePipe } from '@angular/common';
+import {NgbDate, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-view-reports',
@@ -10,10 +11,86 @@ import { DatePipe } from '@angular/common';
 })
 export class ViewReportsComponent implements OnInit {
 
-  private orders = new Array<Order>();
-  constructor(private viewReportController:ViewReportControllerService,private datePipe:DatePipe) { }
+  @ViewChild('SearchByDateDialog') SearchByDateDialog;
+  @ViewChild('SearchByBeetweenDateDialog') SearchByBeetweenDateDialog;
 
-  getOrderByThisDay(){
+  private orders = new Array<Order>();
+  private orderByDatePickDate:NgbDate;
+  private hoveredDate: NgbDate;
+  private fromDate: NgbDate;
+  private toDate: NgbDate;
+ 
+  private showDateOrder:string='';
+
+  constructor(private viewReportController:ViewReportControllerService,private datePipe:DatePipe,calendar: NgbCalendar) { 
+    this.orderByDatePickDate = calendar.getToday();
+    this.fromDate = calendar.getToday();
+    this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
+  }
+   
+  convertDateFormatByPickDate(date:NgbDate):string{
+      let newDate:string;
+      let orderDate = JSON.stringify(date);
+      let orderDateJson = JSON.parse(orderDate);
+      newDate = orderDateJson.year+'-'+orderDateJson.month+'-'+orderDateJson.day
+      return newDate;
+  }
+
+  getOrderByDateBtn(){
+    this.getOrdersByDate(this.orderByDatePickDate);
+  }
+ // Hover date not functional just custom
+  onDateSelection(date: NgbDate) {
+    if (!this.fromDate && !this.toDate) {
+      this.fromDate = date;
+    } else if (this.fromDate && !this.toDate && date.after(this.fromDate)) {
+      this.toDate = date;
+    } else {
+      this.toDate = null;
+      this.fromDate = date;
+    }
+  }
+
+  isHovered(date: NgbDate) {
+    return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate);
+  }
+
+  isInside(date: NgbDate) {
+    return date.after(this.fromDate) && date.before(this.toDate);
+  }
+
+  isRange(date: NgbDate) {
+    return date.equals(this.fromDate) || date.equals(this.toDate) || this.isInside(date) || this.isHovered(date);
+  }
+//
+  getOrdersByDate(date:NgbDate){
+    if(date == null){
+      alert('กรุณาเลือกวันที่')
+    }else{
+    let convertedDate = this.convertDateFormatByPickDate(date);
+    this.viewReportController.getOrderByDate(new Date(convertedDate)).then((res:Order[])=>{
+      this.orders = res;
+    })
+    this.SearchByDateDialog.close()
+    }
+  }
+
+  getOrdersByBeetweenBtn(){
+    this.getOrdersByBeetween(this.fromDate,this.toDate);
+  }
+
+  getOrdersByBeetween(startDate:NgbDate,endDate:NgbDate){
+    let convertedStartDate = this.convertDateFormatByPickDate(startDate);
+    let convertedEndtDate = this.convertDateFormatByPickDate(endDate);
+    this.viewReportController.getOrderByBeetweenDate(new Date(convertedStartDate),new Date(convertedEndtDate)).then((res:Order[])=>{
+      this.orders = res;
+    })
+    this.showDateOrder = 'ระหว่างวันที่ '+this.convertDateFormat(new Date(convertedStartDate))+' ถึงวันที่ '+ this.convertDateFormat(new Date(convertedEndtDate))
+    this.SearchByBeetweenDateDialog.close();
+  }
+
+
+  getOrdersByThisDay(){
     this.viewReportController.getOrderByDate(new Date()).then((res:Order[])=>{
       this.orders = res;
     })
@@ -44,7 +121,7 @@ export class ViewReportsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getOrderByThisDay()
+    
   } 
 
 }

@@ -1,21 +1,70 @@
 <app-navbar></app-navbar>
 <div class="container">
-  <div id="top">
-    <div style style="margin-top:5em">
-      กรุณาเลือกวันที่ต้องการดูรายงานผลการขาย
-      <div class="col-md-3">
-        <div class="form-group">
-          <div class="input-group">
-            <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d="ngbDatepicker">
-            <div class="input-group-append">
-              <button class="btn " (click)="d.toggle()" type="button">
-                <i class="fas fa-calendar-alt"></i>
-              </button>
-            </div>
+<!-- -->
+<modal #SearchByDateDialog>
+    <ng-template #modalHeader>
+        <h4>ค้นหารายการขายด้วยวัน</h4>
+    </ng-template>
+    <ng-template #modalBody>
+      <div class="form-group">
+        <div class="input-group">
+          <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d="ngbDatepicker"
+          [(ngModel)]="orderByDatePickDate" required>
+          <div class="input-group-append">
+            <button class="btn " (click)="d.toggle()" type="button">
+              <i class="fas fa-calendar-alt"></i>
+            </button>
           </div>
+          <button class="btn btn-outline-primary" style="margin-left:1em" (click)="getOrderByDateBtn()"> ค้นหาด้วยวันดังกล่าว <i class="fas fa-search"></i></button>
         </div>
       </div>
-    </div>
+    </ng-template>
+
+  </modal>
+  <!-- -->
+  <modal #SearchByBeetweenDateDialog>
+    <ng-template #modalHeader>
+        <h4>ค้นหารายการขายระหว่างวัน</h4>
+    </ng-template>
+    <ng-template #modalBody>
+        <ngb-datepicker #dp (select)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden">
+          </ngb-datepicker>
+          <ng-template #t let-date let-focused="focused">
+              <span class="custom-day"
+                    [class.focused]="focused"
+                    [class.range]="isRange(date)"
+                    [class.faded]="isHovered(date) || isInside(date)"
+                    (mouseenter)="hoveredDate = date"
+                    (mouseleave)="hoveredDate = null">
+                {{ date.day }}
+              </span>
+            </ng-template>
+    </ng-template>
+    <ng-template #modalFooter>
+        <button class="btn btn-outline-primary" style="margin-left:1em" (click)="getOrdersByBeetweenBtn()"> ค้นหาด้วยวันดังกล่าว <i class="fas fa-search"></i></button>
+    </ng-template>
+  </modal>
+  <!-- -->
+  <modal #SearchByQuarterDialog>
+    <ng-template #modalHeader>
+        <h4>ค้นหารายการขายด้วยไตรมาส</h4>
+    </ng-template>
+    <ng-template #modalBody>
+        {{ errMsg }}
+    </ng-template>
+    <ng-template #modalFooter>
+        <button class="btn btn-outline-primary" (click)="SearchByQuarterDialog.close()">ตกลง</button>
+    </ng-template>
+  </modal>
+
+  <div id="top">
+    <div style style="margin-top:5em;margin-bottom:3em">
+        <div class="row justify-content-center" >
+        <button class="btn btn-outline-primary" (click)="SearchByDateDialog.open()" style="margin-left:1em">ค้นหารายการขายด้วยวันที่ <i class="far fa-calendar-alt"></i></button>
+        <button class="btn btn-outline-primary" (click)="SearchByBeetweenDateDialog.open()" style="margin-left:1em">ค้นหารายการขายระหว่างวัน <i class="far fa-calendar-alt"></i></button>
+        <button class="btn btn-outline-primary" (click)="SearchByQuarterDialog.open()" style="margin-left:1em">ค้นหารายการขายด้วยไตรมาส <i class="far fa-calendar-alt"></i></button>
+      </div>
+      </div>
   </div>
   <div class="alert alert-danger" role="alert" *ngIf="orders.length<1; else showAllOrder" style="text-align:center;">
     ไม่พบรายการ การสั่งซื้อ
@@ -69,4 +118,3 @@
 </div>
 </ng-template>
 </div>
-<app-footer></app-footer>
