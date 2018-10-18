@@ -84,9 +84,14 @@ export class ListLowStockComponent implements OnInit {
     //set sum capital price
     this.sumCapitalPrice();
     this.invoice.setSumPrice(this.sumPrice);
-  
-    this.createInvoiceController.createInvoice(this.invoice).then((res:any)=>{
-    })
+    
+    if(this.isInvoiceDetailsInvaildDate()){
+      alert('กรุณากรอกข้อมูลวันที่ให้ถูกต้อง');
+    }else{
+      this.createInvoiceController.createInvoice(this.invoice).then((res:any)=>{
+      })
+    }
+
 
 
   }
@@ -103,6 +108,24 @@ export class ListLowStockComponent implements OnInit {
         invoiceDetail.setQuantity(1);
       }
     }
+  }
+
+  isInvoiceDetailsInvaildDate():boolean{
+    let result = false;
+    for(let invoiceDetail of this.invoice.getInvoiceDetails()){
+      
+      if(invoiceDetail.getProductInDate().toString() == 'Invalid Date'){
+        result = true;
+        console.log(result)
+        break;
+      }
+      if(invoiceDetail.getProductInDate().getTime() < new Date().getTime()){
+        result = true;
+        console.log(result)
+        break;
+      }
+    } 
+    return result;
   }
 
   ngOnInit() {

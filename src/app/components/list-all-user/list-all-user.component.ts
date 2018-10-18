@@ -32,7 +32,13 @@ export class ListAllUserComponent implements OnInit {
 
   removeUser(id:Number){
     this.removeUserController.removeUser(id).then((res:any)=>{
-      this.getAllUsers()
+      if(res){
+        let responseData = JSON.parse(res);
+        if(responseData.message == 'User is in order please change user status.'){
+          alert('ไม่สามารถลบผู้ใช้งานนี้ได้เนื่องจาก ผู้ใช้งานนี้ได้ทำการทำรายการขายแล้ว ให้กรุณาเปลี่ยนสถานะการใช้งานแทน เพื่อไม่ให้เกิดผลกระทบต่อยอดขาย')
+        }
+      }
+      this.getAllUsers();
     })
   }
 

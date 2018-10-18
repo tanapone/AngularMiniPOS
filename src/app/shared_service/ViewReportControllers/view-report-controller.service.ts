@@ -28,8 +28,8 @@ export class ViewReportControllerService {
           let resOrder = new Order();
           resOrder.setId(order.id);
           resOrder.setOrderDate(order.orderDate);
-          resOrder.setProfit(order.sumPrice);
-          resOrder.setSumPrice(order.profit);
+          resOrder.setProfit(order.profit);
+          resOrder.setSumPrice(order.sumPrice);
           //Define user
           let user = new User();
           user.setId(order.user.id);
@@ -104,8 +104,78 @@ export class ViewReportControllerService {
           let resOrder = new Order();
           resOrder.setId(order.id);
           resOrder.setOrderDate(order.orderDate);
-          resOrder.setProfit(order.sumPrice);
-          resOrder.setSumPrice(order.profit);
+          resOrder.setProfit(order.profit);
+          resOrder.setSumPrice(order.sumPrice);
+          //Define user
+          let user = new User();
+          user.setId(order.user.id);
+          user.setUsername(order.user.username);
+          user.setPassword(order.user.password);
+          user.setUserType(order.user.userType);
+          user.setFirstName(order.user.firstName);
+          user.setLastName(order.user.lastName);
+          user.setEmail(order.user.email);
+          user.setPhoneNumber(order.user.phoneNumber);
+          user.setAddress(order.user.address);
+          user.setUserStatus(order.user.userStauts);
+          user.setAuthKey(order.user.authKey);
+          //Define OrderDetail
+          let orderDetails = new Array<OrderDetail>();
+          for(let orderDetail of order.orderDetails){
+            let resOrderDetail = new OrderDetail();
+            resOrderDetail.setProductAmount(orderDetail.productAmount);
+            //Define product in order detail
+            let resProduct = new Product();
+              // Company
+              let resCompany = new Company();
+              resCompany.setId(orderDetail.product.company.id);
+              resCompany.setCompanyName(orderDetail.product.company.companyName);
+              resCompany.setCompanyAddress(orderDetail.product.company.companyAddress);
+              resCompany.setCompanyPhoneNumber(orderDetail.product.company.companyPhoneNumber);
+              resCompany.setCompanyEmail(orderDetail.product.company.companyEmail);
+              // Category
+              let resCategory = new Category();
+              resCategory.setId(orderDetail.product.category.id);
+              resCategory.setCategoryName(orderDetail.product.category.categoryName);
+              // Products
+              resProduct.setId(orderDetail.product.id);
+              resProduct.setProductName(orderDetail.product.productName);
+              resProduct.setProductBarcodeID(orderDetail.product.productBarcodeID);
+              resProduct.setProductCapitalPrice(orderDetail.product.productCapitalPrice);
+              resProduct.setProductSalePrice(orderDetail.product.productSalePrice);
+              resProduct.setProductMinimum(orderDetail.product.productMinimum);
+              resProduct.setProductQty(orderDetail.product.productQty);
+              // Set category and company
+              resProduct.setCategory(resCategory);
+              resProduct.setCompany(resCompany);
+              resOrderDetail.setProduct(resProduct);
+
+              orderDetails.push(resOrderDetail);
+          }
+          resOrder.setOrderDetails(orderDetails);
+          resOrder.setUser(user);
+          orders.push(resOrder);
+        }
+      }
+      return orders;
+    },error=>{
+      console.log(error);
+    })
+  }
+
+  getOrderByQuater(quater:number,year:number){
+      return this.wsTask.doGet('/order/quater/'+quater+'/'+year+'?authKey='+this.localSt.retrieve('authKey')).then((data:any)=>{
+        let responseData = data;
+      let orders = new Array<Order>();
+      if(responseData!=null){
+        
+        for(let order of responseData){
+          //Define order
+          let resOrder = new Order();
+          resOrder.setId(order.id);
+          resOrder.setOrderDate(order.orderDate);
+          resOrder.setProfit(order.profit);
+          resOrder.setSumPrice(order.sumPrice);
           //Define user
           let user = new User();
           user.setId(order.user.id);

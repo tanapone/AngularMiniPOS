@@ -13,14 +13,16 @@ export class ViewReportsComponent implements OnInit {
 
   @ViewChild('SearchByDateDialog') SearchByDateDialog;
   @ViewChild('SearchByBeetweenDateDialog') SearchByBeetweenDateDialog;
+  @ViewChild('SearchByQuarterDialog') SearchByQuarterDialog;
 
   private orders = new Array<Order>();
   private orderByDatePickDate:NgbDate;
   private hoveredDate: NgbDate;
   private fromDate: NgbDate;
   private toDate: NgbDate;
- 
-  private showDateOrder:string='';
+  private showDateOrderText:string='';
+  private quater:number;
+  private yearOfQuater:number;
 
   constructor(private viewReportController:ViewReportControllerService,private datePipe:DatePipe,calendar: NgbCalendar) { 
     this.orderByDatePickDate = calendar.getToday();
@@ -70,6 +72,8 @@ export class ViewReportsComponent implements OnInit {
     let convertedDate = this.convertDateFormatByPickDate(date);
     this.viewReportController.getOrderByDate(new Date(convertedDate)).then((res:Order[])=>{
       this.orders = res;
+      this.showDateOrderText = 'วันที่ '+this.convertDateFormat(new Date(this.orders[0].getOrderDate()))
+      
     })
     this.SearchByDateDialog.close()
     }
@@ -85,7 +89,7 @@ export class ViewReportsComponent implements OnInit {
     this.viewReportController.getOrderByBeetweenDate(new Date(convertedStartDate),new Date(convertedEndtDate)).then((res:Order[])=>{
       this.orders = res;
     })
-    this.showDateOrder = 'ระหว่างวันที่ '+this.convertDateFormat(new Date(convertedStartDate))+' ถึงวันที่ '+ this.convertDateFormat(new Date(convertedEndtDate))
+    this.showDateOrderText = 'ระหว่างวันที่ '+this.convertDateFormat(new Date(convertedStartDate))+' ถึงวันที่ '+ this.convertDateFormat(new Date(convertedEndtDate))
     this.SearchByBeetweenDateDialog.close();
   }
 
@@ -93,6 +97,22 @@ export class ViewReportsComponent implements OnInit {
   getOrdersByThisDay(){
     this.viewReportController.getOrderByDate(new Date()).then((res:Order[])=>{
       this.orders = res;
+    })
+  }
+
+  getOrderByQuaterBtn(){
+    if(this.quater == null || this.yearOfQuater == null){
+      alert('กรุณาเลือกปี และ ไตรมาส')
+    }else{
+      this.getOrderByQuater(this.quater,this.yearOfQuater);
+      this.showDateOrderText ='ไตรมาสที่ '+this.quater+' ของปี '+this.yearOfQuater;
+    }
+  }
+
+  getOrderByQuater(quater:number,yearOfQuater:number){
+    this.viewReportController.getOrderByQuater(quater,yearOfQuater).then((res:Order[])=>{
+      this.orders = res;
+      this.SearchByQuarterDialog.close()
     })
   }
 

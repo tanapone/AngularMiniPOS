@@ -1,21 +1,22 @@
 <app-navbar></app-navbar>
 <div class="container">
-<!-- -->
-<modal #SearchByDateDialog>
+  <!-- -->
+  <modal #SearchByDateDialog>
     <ng-template #modalHeader>
-        <h4>ค้นหารายการขายด้วยวัน</h4>
+      <h4>ค้นหารายการขายด้วยวัน</h4>
     </ng-template>
     <ng-template #modalBody>
       <div class="form-group">
         <div class="input-group">
-          <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d="ngbDatepicker"
-          [(ngModel)]="orderByDatePickDate" required>
+          <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d="ngbDatepicker" [(ngModel)]="orderByDatePickDate"
+            required>
           <div class="input-group-append">
             <button class="btn " (click)="d.toggle()" type="button">
               <i class="fas fa-calendar-alt"></i>
             </button>
           </div>
-          <button class="btn btn-outline-primary" style="margin-left:1em" (click)="getOrderByDateBtn()"> ค้นหาด้วยวันดังกล่าว <i class="fas fa-search"></i></button>
+          <button class="btn btn-outline-primary" style="margin-left:1em" (click)="getOrderByDateBtn()">
+            ค้นหาด้วยวันดังกล่าว <i class="fas fa-search"></i></button>
         </div>
       </div>
     </ng-template>
@@ -24,54 +25,74 @@
   <!-- -->
   <modal #SearchByBeetweenDateDialog>
     <ng-template #modalHeader>
-        <h4>ค้นหารายการขายระหว่างวัน</h4>
+      <h4>ค้นหารายการขายระหว่างวัน</h4>
     </ng-template>
     <ng-template #modalBody>
-        <ngb-datepicker #dp (select)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden">
-          </ngb-datepicker>
-          <ng-template #t let-date let-focused="focused">
-              <span class="custom-day"
-                    [class.focused]="focused"
-                    [class.range]="isRange(date)"
-                    [class.faded]="isHovered(date) || isInside(date)"
-                    (mouseenter)="hoveredDate = date"
-                    (mouseleave)="hoveredDate = null">
-                {{ date.day }}
-              </span>
-            </ng-template>
+      <ngb-datepicker #dp (select)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden">
+      </ngb-datepicker>
+      <ng-template #t let-date let-focused="focused">
+        <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)" [class.faded]="isHovered(date) || isInside(date)"
+          (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
+          {{ date.day }}
+        </span>
+      </ng-template>
     </ng-template>
     <ng-template #modalFooter>
-        <button class="btn btn-outline-primary" style="margin-left:1em" (click)="getOrdersByBeetweenBtn()"> ค้นหาด้วยวันดังกล่าว <i class="fas fa-search"></i></button>
+      <button class="btn btn-outline-primary" style="margin-left:1em" (click)="getOrdersByBeetweenBtn()">
+        ค้นหาด้วยวันดังกล่าว <i class="fas fa-search"></i></button>
     </ng-template>
   </modal>
   <!-- -->
   <modal #SearchByQuarterDialog>
     <ng-template #modalHeader>
-        <h4>ค้นหารายการขายด้วยไตรมาส</h4>
+      <h4>ค้นหารายการขายด้วยไตรมาส</h4>
     </ng-template>
     <ng-template #modalBody>
-        {{ errMsg }}
+      <span>กรุณาเลือกไตรมาส</span>
+      <select name="quater" class="form-control" [(ngModel)]="quater">
+        <option value=1 selected> 
+          ไตรมาสที่ 1
+        </option>
+        <option value=2>
+          ไตรมาสที่ 2
+        </option>
+        <option value=3>
+          ไตรมาสที่ 3
+        </option>
+        <option value=4>
+          ไตรมาสที่ 4
+        </option>
+      </select>
+      <span>กรุณาเลือกปี</span>
+      <select name="yearOfQuater" class="form-control" [(ngModel)]="yearOfQuater">
+        <option *ngFor="let i of [2018,2017,2016,2015]" selected>
+          {{i}}
+        </option>
+      </select>
     </ng-template>
     <ng-template #modalFooter>
-        <button class="btn btn-outline-primary" (click)="SearchByQuarterDialog.close()">ตกลง</button>
+      <button class="btn btn-outline-primary" (click)="getOrderByQuaterBtn()">ตกลง</button>
     </ng-template>
   </modal>
 
   <div id="top">
     <div style style="margin-top:5em;margin-bottom:3em">
-        <div class="row justify-content-center" >
-        <button class="btn btn-outline-primary" (click)="SearchByDateDialog.open()" style="margin-left:1em">ค้นหารายการขายด้วยวันที่ <i class="far fa-calendar-alt"></i></button>
-        <button class="btn btn-outline-primary" (click)="SearchByBeetweenDateDialog.open()" style="margin-left:1em">ค้นหารายการขายระหว่างวัน <i class="far fa-calendar-alt"></i></button>
-        <button class="btn btn-outline-primary" (click)="SearchByQuarterDialog.open()" style="margin-left:1em">ค้นหารายการขายด้วยไตรมาส <i class="far fa-calendar-alt"></i></button>
+      <div class="row justify-content-center">
+        <button class="btn btn-outline-primary" (click)="SearchByDateDialog.open()" style="margin-left:1em">ค้นหารายการขายด้วยวันที่
+          <i class="far fa-calendar-alt"></i></button>
+        <button class="btn btn-outline-primary" (click)="SearchByBeetweenDateDialog.open()" style="margin-left:1em">ค้นหารายการขายระหว่างวัน
+          <i class="far fa-calendar-alt"></i></button>
+        <button class="btn btn-outline-primary" (click)="SearchByQuarterDialog.open()" style="margin-left:1em">ค้นหารายการขายด้วยไตรมาส
+          <i class="far fa-calendar-alt"></i></button>
       </div>
-      </div>
+    </div>
   </div>
   <div class="alert alert-danger" role="alert" *ngIf="orders.length<1; else showAllOrder" style="text-align:center;">
     ไม่พบรายการ การสั่งซื้อ
   </div>
   <ng-template #showAllOrder>
     <div class="capture">
-      <h2>รายงานผลการขาย {{ convertDateFormat(orders[0].getOrderDate()) }} จำนวน {{ orders.length }} รายการ</h2>
+      <h2>รายงานผลการขาย {{ showDateOrderText }} จำนวน {{ orders.length }} รายการ</h2>
     </div>
     <div class="card" *ngFor="let order of orders" style="margin-top:1em;margin-bottom:1em;">
       <div class="card-header bg-primary text-light">
@@ -79,6 +100,7 @@
       </div>
       <div class="card-body">
         <div>
+          <h4>วันเวลาที่ทำรายการ {{ order.getOrderDate() }}</h4>
           <table class="table">
             <thead>
               <th>รหัสสินค้า</th>
@@ -106,15 +128,16 @@
       <hr />
       <h3>ราคารวมทั้งหมด : <span style="color:orange">{{ sumAllPrice() | number}}</span> บาท</h3>
       <h3>กำไรรวมทั้งหมด : <span style="color:orangered">{{ sumAllProfit() | number}}</span> บาท</h3>
-      <h3>กำไรหักลบภาษี <span style="color:orange">7%</span> (<span style="color:maroon">{{(sumAllProfit()*0.07) | number}}</span>) : <span style="color:green">{{ sumAllProfit() -
+      <h3>กำไรหักลบภาษี <span style="color:orange">7%</span> (<span style="color:maroon">{{(sumAllProfit()*0.07) |
+          number}}</span>) : <span style="color:green">{{ sumAllProfit() -
           (sumAllProfit()*0.07) | number}}</span> บาท</h3>
     </div>
-<div class="row">
-  <div class="col-12" style="padding:10px">
-    <button class="btn btn-outline-primary float-right" (click)="gotoTop()">
-      กลับขึ้นไปด้านบน <i class="fas fa-chevron-up"></i>
-    </button>
-  </div>
-</div>
-</ng-template>
+    <div class="row">
+      <div class="col-12" style="padding:10px">
+        <button class="btn btn-outline-primary float-right" (click)="gotoTop()">
+          กลับขึ้นไปด้านบน <i class="fas fa-chevron-up"></i>
+        </button>
+      </div>
+    </div>
+  </ng-template>
 </div>
