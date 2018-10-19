@@ -38,9 +38,10 @@ export class ViewReportsComponent implements OnInit {
       return newDate;
   }
 
-  getOrderByDateBtn(){
-    this.getOrdersByDate(this.orderByDatePickDate);
-  }
+  // getOrderByDateBtn(){
+  //   this.getOrdersByDate(this.orderByDatePickDate);
+  // }
+
  // Hover date not functional just custom
   onDateSelection(date: NgbDate) {
     if (!this.fromDate && !this.toDate) {
@@ -79,8 +80,26 @@ export class ViewReportsComponent implements OnInit {
     }
   }
 
-  getOrdersByBeetweenBtn(){
-    this.getOrdersByBeetween(this.fromDate,this.toDate);
+  // getOrdersByBeetweenBtn(){
+  //   this.getOrdersByBeetween(this.fromDate,this.toDate);
+  // }
+
+  getOrdersByCriteria(criteria:string){
+    console.log(criteria)
+    if(criteria=='date'){
+      this.getOrdersByDate(this.orderByDatePickDate);
+    }
+    if(criteria=='between'){
+      this.getOrdersByBeetween(this.fromDate,this.toDate);
+    }
+    if(criteria=='quater'){
+      if(this.quater == null || this.yearOfQuater == null){
+        alert('กรุณาเลือกปี และ ไตรมาส')
+      }else{
+        this.getOrderByQuater(this.quater,this.yearOfQuater);
+        this.showDateOrderText ='ไตรมาสที่ '+this.quater+' ของปี '+this.yearOfQuater;
+      }
+    }
   }
 
   getOrdersByBeetween(startDate:NgbDate,endDate:NgbDate){
@@ -94,20 +113,20 @@ export class ViewReportsComponent implements OnInit {
   }
 
 
-  getOrdersByThisDay(){
-    this.viewReportController.getOrderByDate(new Date()).then((res:Order[])=>{
-      this.orders = res;
-    })
-  }
+  // getOrdersByThisDay(){
+  //   this.viewReportController.getOrderByDate(new Date()).then((res:Order[])=>{
+  //     this.orders = res;
+  //   })
+  // }
 
-  getOrderByQuaterBtn(){
-    if(this.quater == null || this.yearOfQuater == null){
-      alert('กรุณาเลือกปี และ ไตรมาส')
-    }else{
-      this.getOrderByQuater(this.quater,this.yearOfQuater);
-      this.showDateOrderText ='ไตรมาสที่ '+this.quater+' ของปี '+this.yearOfQuater;
-    }
-  }
+  // getOrderByQuaterBtn(){
+  //   if(this.quater == null || this.yearOfQuater == null){
+  //     alert('กรุณาเลือกปี และ ไตรมาส')
+  //   }else{
+  //     this.getOrderByQuater(this.quater,this.yearOfQuater);
+  //     this.showDateOrderText ='ไตรมาสที่ '+this.quater+' ของปี '+this.yearOfQuater;
+  //   }
+  // }
 
   getOrderByQuater(quater:number,yearOfQuater:number){
     this.viewReportController.getOrderByQuater(quater,yearOfQuater).then((res:Order[])=>{
