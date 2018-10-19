@@ -26,8 +26,20 @@
             <li class="nav-item">
                 <a class="nav-link" [routerLink]="['/view-reports']">รายงานผลการขาย</a>
             </li>
+            <modal #confirmLogout>
+                <ng-template #modalHeader>
+                    <h4>คำเตือน</h4>
+                </ng-template>
+                <ng-template #modalBody>
+                    คุณต้องการที่จะออกจากระบบใช่หรือไม่
+                </ng-template>
+                <ng-template #modalFooter>
+                    <button class="btn btn-outline-danger" (click)="confirmLogout.close()">ยกเลิก</button>
+                    <button class="btn btn-outline-primary" (click)="logOut()">ยืนยันการลบ</button>
+                </ng-template>
+            </modal>
             <li class="nav-item">
-                <a class="nav-link" (click)="logOut()">ออกจากระบบ</a>
+                <a class="nav-link" (click)="confirmLogout.open()">ออกจากระบบ</a>
             </li>
         </ul>
     </div>
