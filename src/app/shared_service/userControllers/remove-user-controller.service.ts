@@ -9,8 +9,8 @@ export class RemoveUserControllerService {
 
   constructor(private wsTask:WsTaskService,private localSt:LocalStorageService) { }
 
-  removeUser(id:Number):Promise<string|void>{
-   return this.wsTask.doDelete('/delete/user/'+id+'?authKey='+this.localSt.retrieve('authKey')).then((data:any)=>{
+  removeUser(username:string):Promise<string|void>{
+   return this.wsTask.doDelete('/delete/user/'+username+'?authKey='+this.localSt.retrieve('authKey')).then((data:any)=>{
     let responseData = data
     if(responseData.message){
       return JSON.stringify(responseData)

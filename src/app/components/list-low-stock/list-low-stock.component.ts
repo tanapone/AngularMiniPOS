@@ -20,6 +20,7 @@ export class ListLowStockComponent implements OnInit {
   invoiceDetails = new Array<InvoiceDetail>();
   errMsg:string = '';
   sumPrice:0;
+  companyName = '';
 
   constructor(private listLowStockController:ListLowStockControllerService,private createInvoiceController:CreateInvoiceControllerService) { }
 
@@ -36,16 +37,37 @@ export class ListLowStockComponent implements OnInit {
   }
 
   addProductToPurchased(product:Product){
-  this.products = this.products.filter(item => item.getId() !== product.getId());
+  
    let newInvoiceDetail = new InvoiceDetail();
-   newInvoiceDetail.setProduct(product);
-   this.invoiceDetails.push(newInvoiceDetail);
+
+  if(this.invoiceDetails.length > 0){
+    if(product.getCompany().getCompanyName() != this.invoiceDetails[0].getProduct().getCompany().getCompanyName()){
+        alert('ใบเสร็จสามารถทำได้ทีละบริษัทเท่านั้น') 
+    }else{
+      newInvoiceDetail.setProduct(product);
+      newInvoiceDetail.setProductCapitalPrice(product.getProductCapitalPrice());
+      newInvoiceDetail.setProductInQuantity(0);
+      this.invoiceDetails.push(newInvoiceDetail);
+      this.companyName = 'ของบริษัท ' + this.invoiceDetails[0].getProduct().getCompany().getCompanyName();
+      this.products = this.products.filter(item => item.getId() !== product.getId());
+    }
+
+    }else{
+      newInvoiceDetail.setProduct(product);
+      newInvoiceDetail.setProductCapitalPrice(product.getProductCapitalPrice());
+      this.invoiceDetails.push(newInvoiceDetail);
+      newInvoiceDetail.setProductInQuantity(0);
+      this.companyName = 'ของบริษัท ' + this.invoiceDetails[0].getProduct().getCompany().getCompanyName();
+      this.products = this.products.filter(item => item.getId() !== product.getId());
+    }
+  
   }
 
   removeProductToPurchased(product:Product){
     this.products.push(product);
     // this.productsWantToPurchased = this.productsWantToPurchased.filter(item => item.getId() !== product.getId());
     this.invoiceDetails = this.invoiceDetails.filter(item => item.getProduct().getId() != product.getId());
+    this.companyName = ''
   }
 
 
@@ -79,11 +101,10 @@ export class ListLowStockComponent implements OnInit {
   createInvoice(){
     //convert date json to string and set
     this.settingDateInvoiceDetail();
+    //set invoice company
+    this.invoice.setCompany(this.invoiceDetails[0].getProduct().getCompany());
     //set invoiceDetails to invoice
     this.invoice.setInvoiceDetails(this.invoiceDetails);
-    //set sum capital price
-    this.sumCapitalPrice();
-    this.invoice.setSumPrice(this.sumPrice);
     
     if(this.isInvoiceDetailsInvaildDate()){
       alert('กรุณากรอกข้อมูลวันที่ให้ถูกต้อง');

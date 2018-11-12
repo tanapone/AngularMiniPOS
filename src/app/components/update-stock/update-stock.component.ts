@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Invoice } from 'src/app/entity/invoice';
 import { InvoiceDetail } from 'src/app/entity/invoice-detail';
 import { ActivatedRoute } from '@angular/router';
@@ -10,10 +10,11 @@ import { UpdateStockControllerService } from 'src/app/shared_service/invoiceCont
   styleUrls: ['./update-stock.component.css']
 })
 export class UpdateStockComponent implements OnInit {
-  
+  @ViewChild('confirmUpdateStock') confirmUpdateStock;
+
   id:Number;
   private invoice = new Invoice();
-  private isProductInDefault = new Array<boolean>();
+  private productInQuantityDefault = new Array<number>();
   constructor(private route:ActivatedRoute,private updateStockController:UpdateStockControllerService) { }
 
   getInvoiceById(id:Number){
@@ -25,13 +26,19 @@ export class UpdateStockComponent implements OnInit {
   
 
   updateInvoice(){
-    this.updateStockController.updateInvoice(this.invoice).then((res:string)=>{
+    if(this.checkInvaildProductInQuantityValue()){
+      this.confirmUpdateStock.close();
+      alert('กรุณากรอกข้อมูลให้ถูกต้อง');
+    }else{
+          this.updateStockController.updateInvoice(this.invoice).then((res:string)=>{
     })
+    }
+
   }
   
   checkProductIn(invoiceDetail:InvoiceDetail):boolean{
     let isProductIn:boolean = true;
-    if(invoiceDetail.isProductIn()!=true){
+    if(invoiceDetail.getProductInQuantity()!=invoiceDetail.getQuantity()){
       isProductIn = false;
     }
     return isProductIn;
@@ -43,10 +50,45 @@ export class UpdateStockComponent implements OnInit {
 
   setIsProductInDefault(){
     for(let invoiceDetail of this.invoice.getInvoiceDetails()){
-      this.isProductInDefault.push(invoiceDetail.isProductIn());
+      this.productInQuantityDefault.push(invoiceDetail.getProductInQuantity());
     }
   }
   
+  sumPrice():number {
+    let sumPrice:number = 0;
+    this.invoice.getInvoiceDetails().forEach(function(invoiceDetail){
+        sumPrice += (invoiceDetail.getProductCapitalPrice()*invoiceDetail.getQuantity());
+    })
+    
+    return sumPrice;
+  }
+
+  checkInvaildProductInQuantityValue():boolean{
+    let result = false;
+    let productInQuantityDefault = this.productInQuantityDefault;
+    this.invoice.getInvoiceDetails().forEach(function(invoiceDetail,index){
+
+      if(invoiceDetail.getProductInQuantity()>invoiceDetail.getQuantity()){
+        result =true;
+      }
+      if(invoiceDetail.getProductInQuantity()<0){
+        result =true;
+      }
+      if(invoiceDetail.getProductInQuantity() < productInQuantityDefault[index]){
+        result = true;
+      }
+
+    })
+    return result;
+  }
+
+  checkInvoiceDetailCompleate(index:number):boolean{
+    let result = false;
+    if(this.productInQuantityDefault[index] == this.invoice.getInvoiceDetails()[index].getQuantity()){
+      result = true;
+    }
+    return result;
+    }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];

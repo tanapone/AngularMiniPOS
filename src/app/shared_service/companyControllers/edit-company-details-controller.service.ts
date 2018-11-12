@@ -14,9 +14,10 @@ export class EditCompanyDetailsControllerService {
   editCompanyDetails(company:Company){
     return this.wsTask.doPost('/update/company/?authKey='+this.localSt.retrieve('authKey'),company).then((data:any)=>{
       let responseData = data
-      if(responseData.message){
+      if(responseData.message && responseData.message != 'Success.'){
         return JSON.stringify(responseData)
       }else{
+        alert('บันทึกข้อมูล บริษัทนำเข้าสำเร็จ')
         this.router.navigate(['/list-all-companies'])
       }
     },error=>{

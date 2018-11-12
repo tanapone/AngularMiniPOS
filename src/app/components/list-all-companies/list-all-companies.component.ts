@@ -32,7 +32,10 @@ export class ListAllCompaniesComponent implements OnInit {
           if(this.errModalMsg!=''){
             alert(this.errModalMsg)
           }
-          this.getAllCompanies()
+          if(responseData.message == 'Success.'){
+            alert('ลบข้อมูลสำเร็จ');
+            this.getAllCompanies()
+          }
       }
     }
     })

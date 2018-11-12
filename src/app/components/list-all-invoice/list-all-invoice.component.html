@@ -13,6 +13,7 @@
                             <th>หมายเลขใบสั่งซื้อ</th>
                             <th>ทำรายการวันที่</th>
                             <th>รายการสินค้า</th>
+                            <th>บริษัทนำเข้า</th>
                             <th>สถานะ</th>
                             <th>จัดการ</th>
                         </tr>
@@ -22,6 +23,7 @@
                             <td>{{ invoice.getId() }}</td>
                             <td>{{ invoice.getDate() }}</td>
                             <td>{{ invoice.getInvoiceDetails().length }} รายการ</td>
+                            <td>{{ invoiceForCompany(invoice) }}</td>
                             <td>
                              <span *ngIf="checkProductIn(invoice)=='ดำเนินการสำเร็จ'" style="background-color:green;color:white;padding:5px">
                                   {{ checkProductIn(invoice) }}

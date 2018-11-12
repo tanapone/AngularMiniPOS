@@ -1,11 +1,12 @@
 import { InvoiceDetail } from "./invoice-detail";
+import { Company } from "./company";
 
 export class Invoice {
   private id: Number;
   private date: Date;
-  private sumPrice:Number;
+  private company:Company;
   private invoiceDetails:Array<InvoiceDetail>;
-    
+  
   public getId(): Number {
     return this.id;
   }
@@ -21,15 +22,16 @@ export class Invoice {
   public setDate(date: Date): void {
     this.date = date;
   }
-
-  public getSumPrice(): Number {
-    return this.sumPrice;
-  }
-
-  public setSumPrice(sumPrice: Number): void {
-    this.sumPrice = sumPrice;
-  }
   
+  public getCompany(): Company {
+    return this.company;
+  }
+
+  public setCompany(company: Company): void {
+      this.company = company;
+  }
+
+
   public getInvoiceDetails(): Array<InvoiceDetail> {
         return this.invoiceDetails;
   }

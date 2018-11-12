@@ -1,44 +1,54 @@
-import { Product } from './product';
+import { Product } from "./product";
 
 export class InvoiceDetail {
-    private product:Product;
-    private quantity:number;
-    private productInDate:Date = new Date();
-	private productIn:boolean;
-    
-    public InvoiceDetail(){
-        this.quantity = 0;
+  private product: Product;
+  private productCapitalPrice: number;
+  private quantity: number;
+  private productInDate: Date = new Date();
+  private productInQuantity: number;
+
+    public getProduct(): Product
+ 	{
+        return this.product;
     }
 
-	public getProduct(): Product {
-		return this.product;
-	}
+    public setProduct(product: Product): void {
+        this.product = product;
+    }
 
-	public setProduct(product: Product): void {
-		this.product = product;
-	}
+    public getProductCapitalPrice(): number
+ 	{
+        return this.productCapitalPrice;
+    }
 
-	public getQuantity(): number {
-		return this.quantity;
-	}
+    public setProductCapitalPrice(productCapitalPrice: number): void {
+        this.productCapitalPrice = productCapitalPrice;
+    }
 
-	public setQuantity(quantity: number): void {
-		this.quantity = quantity;
-	}
+    public getQuantity(): number
+ 	{
+        return this.quantity;
+    }
 
-	public getProductInDate(): Date {
-		return this.productInDate;
-	}
+    public setQuantity(quantity: number): void {
+        this.quantity = quantity;
+    }
 
-	public setProductInDate(productInDate: Date): void {
-		this.productInDate = productInDate;
-	}
+    public getProductInDate(): Date
+ 	{
+        return this.productInDate;
+    }
 
-	public isProductIn(): boolean {
-		return this.productIn;
-	}
+    public setProductInDate(productInDate: Date): void {
+        this.productInDate = productInDate;
+    }
 
-	public setProductIn(productIn: boolean): void {
-		this.productIn = productIn;
-	}
+    public getProductInQuantity(): number {
+        return this.productInQuantity;
+    }
+
+    public setProductInQuantity(productInQuantity: number): void {
+        this.productInQuantity = productInQuantity;
+    }
+
 }

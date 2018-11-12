@@ -138,7 +138,9 @@ export class ViewReportsComponent implements OnInit {
   sumAllPrice():number{
     let sumPrice:number = 0;
     for(let order of this.orders){
-      sumPrice += order.getSumPrice();
+      order.getOrderDetails().forEach(function(orderDetail){
+        sumPrice += orderDetail.getProductSalePrice()*orderDetail.getProductAmount();
+      })
     }
     return sumPrice
   }
@@ -146,9 +148,27 @@ export class ViewReportsComponent implements OnInit {
   sumAllProfit():number{
     let sumProfit:number = 0;
     for(let order of this.orders){
-      sumProfit += order.getProfit();
+      order.getOrderDetails().forEach(function(orderDetail){
+        sumProfit += ((orderDetail.getProductSalePrice()*orderDetail.getProductAmount())-(orderDetail.getProductCaptialPrice()*orderDetail.getProductAmount()))
+      })
     }
     return sumProfit
+  }
+
+  sumPriceOrder(order:Order):number{
+    let sumPrice:number = 0;
+      order.getOrderDetails().forEach(function(orderDetail){
+        sumPrice += orderDetail.getProductSalePrice()*orderDetail.getProductAmount();
+      })
+    return sumPrice;
+  }
+
+  sumProfitOrder(order:Order):number{
+    let sumProfit:number = 0;
+      order.getOrderDetails().forEach(function(orderDetail){
+        sumProfit += ((orderDetail.getProductSalePrice()*orderDetail.getProductAmount())-(orderDetail.getProductCaptialPrice()*orderDetail.getProductAmount()))
+      })
+    return sumProfit;
   }
 
   convertDateFormat(date:Date):string{

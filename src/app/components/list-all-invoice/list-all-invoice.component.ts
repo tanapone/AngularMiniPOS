@@ -22,7 +22,8 @@ export class ListAllInvoiceComponent implements OnInit {
     let allProductIn:boolean = true;
     let reusultText:string ='';
     for(let invoiceDetail of invoice.getInvoiceDetails()){
-      if(invoiceDetail.isProductIn()!=true){
+     
+      if(invoiceDetail.getProductInQuantity() != invoiceDetail.getQuantity()){
         allProductIn = false;
         break;
       }
@@ -33,6 +34,10 @@ export class ListAllInvoiceComponent implements OnInit {
       reusultText = 'รอการดำเนินการ'
     }
     return reusultText;
+  }
+
+  invoiceForCompany(invoice:Invoice):String{
+    return invoice.getCompany().getCompanyName();
   }
 
   ngOnInit() {

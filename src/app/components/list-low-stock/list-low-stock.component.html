@@ -15,6 +15,7 @@
                         <tr>
                             <th>ลำดับที่</th>
                             <th>ชื่อสินค้า</th>
+                            <th>บริษัทนำเข้า</th>
                             <th>จำนวนสินค้าคงเหลือ</th>
                             <th>จัดการ</th>
                         </tr>
@@ -23,6 +24,7 @@
                         <tr *ngFor="let product of products; index as i">
                             <td>{{ i+1 }}</td>
                             <td>{{ product.getProductName() }}</td>
+                            <td>{{ product.getCompany().getCompanyName() }}</td>
                             <td>{{ product.getProductQty() }} ชิ้น</td>
                             <td>
                                 <Button class="btn btn-outline-primary" (click)="addProductToPurchased(product)">
@@ -34,7 +36,7 @@
                 </table>
             </ng-template>
           
-            <h2>รายการสินค้าที่ต้องการสั่งซื้อ</h2>
+            <h2>รายการสินค้าที่ต้องการสั่งซื้อ {{companyName}}</h2>
             <div class="alert alert-danger" role="alert" *ngIf="invoiceDetails.length<1; else productsWantToPurchasedTable" style="text-align:center;">
                 ยังไม่มีรายการสินค้าที่ต้องการสั่งซื้อ
             </div>
@@ -64,7 +66,7 @@
             </ng-template>
             <modal #productsWantToPurchasedModal>
                 <ng-template #modalHeader>
-                    <h4>สร้างใบสังซื้อสินค้า</h4>
+                 <h4>สร้างใบสังซื้อสินค้า {{ companyName }}</h4>
                 </ng-template>
                 <ng-template #modalBody>
                   <h2>รายการสินค้าที่ต้องการสั่งซื้อ</h2>
@@ -106,7 +108,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <span>ราคารวม : {{ sumPrice }}</span>
+                    <span style="float:right;color:green;font-size:20px">ราคารวม : {{ sumPrice }} บาท</span>
                 </ng-template>
                 <ng-template #modalFooter>
                     <button class="btn btn-outline-danger" (click)="productsWantToPurchasedModal.close()">ยกเลิก</button>

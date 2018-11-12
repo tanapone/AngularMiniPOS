@@ -34,7 +34,11 @@ export class ListAllCategoriesComponent implements OnInit {
           if(this.errModalMsg!=''){
             alert(this.errModalMsg)
           }
-          this.getAllCategories()
+          if(responseData.message == 'Success.'){
+            alert('ลบข้อมูล ประเภทสินค้าสำเร็จ');
+            this.getAllCategories();
+          }
+          
       }
     }
     })

@@ -18,20 +18,28 @@ export class UpdateStockControllerService {
 
   getInvoiceById(id:Number):Promise<Invoice|void>{
     return this.wsTask.doGet('/invoice/'+id+'?authKey='+this.localSt.retrieve('authKey')).then((data:any)=>{
-      console.log('/invoice/'+id+'?autheKey='+this.localSt.retrieve('authKey'))
+      console.log('/invoice/'+id+'?authKey='+this.localSt.retrieve('authKey'))
       let responseData = data;
       let resInvoice = new Invoice();
       if(responseData!=null){
         resInvoice.setId(responseData.id);
         resInvoice.setDate(responseData.invoiceDate);
-        resInvoice.setSumPrice(responseData.sumPrice);
+        // Company
+        let resCompany = new Company();
+        resCompany.setId(responseData.company.id);
+        resCompany.setCompanyName(responseData.company.companyName);
+        resCompany.setCompanyAddress(responseData.company.companyAddress);
+        resCompany.setCompanyPhoneNumber(responseData.company.companyPhoneNumber);
+        resCompany.setCompanyEmail(responseData.company.companyEmail);
+        resInvoice.setCompany(resCompany);
+
         let resInvoiceDetails = new Array<InvoiceDetail>();
         for(let invoiceDetail of responseData.invoiceDetails){
           let resInvoiceDetail = new InvoiceDetail();
           resInvoiceDetail.setProductInDate(invoiceDetail.productInDate);
-          resInvoiceDetail.setProductIn(invoiceDetail.productIn);
+          resInvoiceDetail.setProductInQuantity(invoiceDetail.productInQuantity);
           resInvoiceDetail.setQuantity(invoiceDetail.quantity);
-  
+          resInvoiceDetail.setProductCapitalPrice(invoiceDetail.productCapitalPrice);
           let resProduct = new Product();
           // Company
           let resCompany = new Company();
@@ -72,9 +80,10 @@ export class UpdateStockControllerService {
     return this.wsTask.doPost('/update/invoice?authKey='+this.localSt.retrieve('authKey'),invoice).then((data:any)=>{
       let responseData = data
       console.log(responseData)
-      if(responseData.message){
+      if(responseData.message && responseData.message != 'Success.'){
         return JSON.stringify(responseData);
       }else{
+        alert('แก้ไขสินค้าภายในคลังสำเร็จ');
         this.router.navigate(['/list-all-invoice']);
       }
     },error=>{

@@ -13,10 +13,11 @@ export class AddUserContollerService {
   addUser(user:User):Promise<string|void>{
   return this.wsTask.doPost('/create/user?authKey='+this.localSt.retrieve('authKey') ,user).then((data:any)=>{
         let responseData = data
-        if(responseData.message){
+        if(responseData.message && responseData.message!='Success.'){
           console.log(responseData.message)
           return JSON.stringify(responseData)
         }else{
+          alert('บันทึกสำเร็จ');
           this.router.navigate(['/list-all-users'])
         }
       },error=>{

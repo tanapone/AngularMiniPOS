@@ -26,8 +26,8 @@ export class ResetUserPasswordComponent implements OnInit {
   }
 
   checkUser(){
-    if(this.user.getId()==undefined){
-      console.log(this.user.getId())
+    if(this.user.getUsername()==undefined){
+      console.log(this.user.getUsername())
       this.errMsg = 'ไม่พบข้อมูลผู้ใช้'
     }
   }

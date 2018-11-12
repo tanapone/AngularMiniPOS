@@ -14,7 +14,6 @@ export class ResetUserPasswordControllerService {
     return this.wsTask.doGet('/user'+'?authKey='+authKey).then((data:any)=>{
       let responseData = data
       let user = new User();
-        user.setId(responseData.id)
         user.setUsername(responseData.username)
         user.setPassword(responseData.password)
         user.setFirstName(responseData.firstName)
@@ -24,6 +23,7 @@ export class ResetUserPasswordControllerService {
         user.setAddress(responseData.address)
         user.setAuthKey(responseData.authKey)
         user.setUserType(responseData.userType)
+        user.setUserStatus(responseData.userStatus)
       return user
     },error=>{
       console.log(error)
@@ -36,7 +36,7 @@ export class ResetUserPasswordControllerService {
       if(responseData.message && responseData.message!='Success.'){
         return JSON.stringify(responseData)
       }else{
-        console.log('success')
+        alert('แก้ไขรหัสผ่านสำเร็จ')
         this.router.navigate(['/'])
       }
     },error=>{

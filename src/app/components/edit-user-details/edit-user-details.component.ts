@@ -13,7 +13,7 @@ export class EditUserDetailsComponent implements OnInit {
 
   form:FormGroup
   errMsg:string =''
-  id:Number
+  username:string
   user = new User();
 
   prepareUserData = {
@@ -38,8 +38,8 @@ export class EditUserDetailsComponent implements OnInit {
     })
   }
 
-  getUser(id:Number){
-      this.editUserDetailsController.getUser(id).then((res:User)=>{
+  getUser(username:string){
+      this.editUserDetailsController.getUser(username).then((res:User)=>{
         this.user = res
       })
   }
@@ -57,8 +57,8 @@ export class EditUserDetailsComponent implements OnInit {
       userStatus: new FormControl(''),
       userType: new FormControl('',Validators.required)
     })
-    this.id = this.route.snapshot.params['id']
-    this.getUser(this.id)
+    this.username = this.route.snapshot.params['username']
+    this.getUser(this.username)
   }
 
 }

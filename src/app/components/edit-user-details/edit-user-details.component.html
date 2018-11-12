@@ -4,7 +4,7 @@
         <div class="row justify-content-center">
             <div class="col-md-6 create-user-form">
                 <h2 style="text-align:center;margin-bottom:1em">แก้ไขบัญชีผู้ใช้</h2>
-                <div class="alert alert-danger" role="alert" *ngIf="user.id==undefined; else editUserForm" style="margin-top:1em;text-align:center;">
+                <div class="alert alert-danger" role="alert" *ngIf="user.username==undefined; else editUserForm" style="margin-top:1em;text-align:center;">
                     ไม่พบข้อมูลบัญชีผู้ใช้
                 </div>
                 <ng-template #editUserForm>

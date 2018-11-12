@@ -11,36 +11,41 @@
 
                 <ng-template #editCategoryForm>
                   <div class="row justify-content-center" style="margin-top:3em">
-                  <div class="col-md-8">
-                    <h2>รายการสินค้าที่อยู่ในใบสั่งซื้อ</h2>
+                  <div class="col-md-9">
+                    <h4>รายการสินค้าที่อยู่ในใบสั่งซื้อ ของบริษัท {{ invoice.getCompany().getCompanyName() }}</h4>
                     <table class="table">
                       <thead>
-                        <th>ชื่อสินค้า</th>
-                        <th>จำนวนสินค้าคงเหลือ</th>
-                        <th>จำนวนสินค้านำเข้า</th>
-                        <th>วันที่คาดว่าสินค้าจะเข้า</th>
-                        <th>สถานะนำเข้าสินค้า</th>
+                        <th align="center">ชื่อสินค้า</th>
+                        <th align="center">จำนวนสินค้าคงเหลือ</th>
+                        <th align="center">จำนวนสินค้านำเข้า</th>
+                        <th align="center">วันที่คาดว่าสินค้าจะเข้า</th>
+                        <th align="center">สถานะนำเข้าสินค้า</th>
                       </thead>
                       <tbody>
                         <tr *ngFor="let invoiceDetail of invoice.invoiceDetails;index as i">
-                          <td>{{ invoiceDetail.product.productName }}</td>
-                          <td>{{ invoiceDetail.product.productQty }}&nbsp;ชิ้น</td>
-                          <td>{{ invoiceDetail.quantity }}&nbsp;ชิ้น</td>
-                          <td>{{ invoiceDetail.productInDate }}</td>
-                          <td>
+                          <td width="15%">{{ invoiceDetail.product.productName }}</td>
+                          <td width="20%">{{ invoiceDetail.product.productQty }}&nbsp;ชิ้น</td>
+                          <td width="15%">{{ invoiceDetail.quantity }}&nbsp;ชิ้น</td>
+                          <td width="25%">{{ invoiceDetail.productInDate }}</td>
+                          <td width="40%">
                             <!-- if productIn -->
-                            <label class="switch">
+                            <!-- <label class="switch">
                               <input type="checkbox" [checked]="invoiceDetail.productIn"
                               [disabled]="isProductInDefault[i]"
                               [(ngModel)]="invoiceDetail.productIn">
                               <span class="slider round"></span>
-                            </label>
+                            </label> -->
+                            <input type="number" [(ngModel)]="invoiceDetail.productInQuantity"
+                            class="form-control" style="max-width:25%;text-align:center;display:inline"
+                            [disabled]="checkInvoiceDetailCompleate(i)" alt="ค่าดั่งเดิมคือ : ProductInQuantityDefault[i]">
+                            / {{ invoiceDetail.quantity }}
+                            
                           </td>
                         </tr>
                       </tbody>
                     </table>
                    
-                        <h3 style="text-align:right">ราคารวม <span style="color:green">{{ invoice.sumPrice | number}}</span> บาท</h3>
+                        <h3 style="text-align:right">ราคารวม <span style="color:green">{{ sumPrice() | number}}</span> บาท</h3>
                     
                     <button type="submit" class="btn btn-outline-primary" style="margin-top:1em;float:right" (click)="confirmUpdateStock.open()">บันทึกใบสั่งซื้อ</button>
                     <button type="submit" class="btn btn-outline-danger" style="margin-top:1em;float:right;margin-right:1em;" (click)="reset()">รีเซ็ต</button>

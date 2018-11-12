@@ -12,11 +12,13 @@ export class CreateInvoiceControllerService {
   constructor(private router:Router,private wsTask:WsTaskService,private localSt:LocalStorageService) { }
 
   createInvoice(invoice:Invoice):Promise<string|void>{
+    console.log(invoice)
       return this.wsTask.doPost('/create/invoice?authKey='+this.localSt.retrieve('authKey'),invoice).then((data:any)=>{
         let responseData = data
-        if(responseData.message){
+        if(responseData.message && responseData.message != 'Success.'){
           return JSON.stringify(responseData)
         }else{
+          alert('สร้างใบสั่งซื้อสินค้า สำเร็จ')
           this.router.navigate(['/list-all-invoice'])
         }
       },error=>{

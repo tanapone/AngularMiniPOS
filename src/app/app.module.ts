@@ -62,7 +62,7 @@ import { ListAllCategoriesControllerService } from './shared_service/categoryCon
       component:AddUserComponent
     },
     {
-      path:'edit/user/:id',
+      path:'edit/user/:username',
       component:EditUserDetailsComponent
     },
     {

@@ -11,11 +11,10 @@ export class EditUserDetailsControllerService {
 
   constructor(private router:Router,private localSt:LocalStorageService,private wsTask:WsTaskService) { }
 
-  getUser(id:Number):Promise<User|void>{
-    return this.wsTask.doGet('/user/id/'+id+'?authKey='+this.localSt.retrieve('authKey')).then((data:any)=>{
+  getUser(username:string):Promise<User|void>{
+    return this.wsTask.doGet('/user/username/'+username+'?authKey='+this.localSt.retrieve('authKey')).then((data:any)=>{
       let responseData = data
       let user = new User();
-        user.setId(responseData.id)
         user.setUsername(responseData.username)
         user.setPassword(responseData.password)
         user.setFirstName(responseData.firstName)
@@ -35,9 +34,10 @@ export class EditUserDetailsControllerService {
   editUser(user:User):Promise<string|void>{
     return this.wsTask.doPost('/update/user'+'?authKey='+this.localSt.retrieve('authKey'),user).then((data:any)=>{
       let responseData = data
-      if(responseData.message){
+      if(responseData.message && responseData.message!='Success.'){
         return JSON.stringify(responseData)
       }else{
+        alert('บันทึกสำเร็จ');
         this.router.navigate(['/list-all-users'])
       }
     },error=>{

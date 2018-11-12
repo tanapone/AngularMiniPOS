@@ -88,7 +88,7 @@
     </div>
   </div>
   <div class="alert alert-danger" role="alert" *ngIf="orders.length<1; else showAllOrder" style="text-align:center;">
-    ไม่พบรายการ การสั่งซื้อ
+    ไม่พบรายการขาย
   </div>
   <ng-template #showAllOrder>
     <div class="capture">
@@ -106,20 +106,24 @@
               <th>รหัสสินค้า</th>
               <th>ชื่อสินค้า</th>
               <th>จำนวนสินค้า</th>
+              <th>ราคาทุนสินค้า</th>
+              <th>ราคาขายสินค้า</th>
             </thead>
             <tbody>
               <tr *ngFor="let orderDetail of order.orderDetails">
                 <td>{{ orderDetail.product.id }}</td>
                 <td>{{ orderDetail.product.productName }}</td>
                 <td>{{ orderDetail.productAmount }} ชิ้น</td>
+                <td>{{ orderDetail.productCaptialPrice }} บาท</td>
+                <td>{{ orderDetail.productSalePrice }} บาท</td>
               </tr>
             </tbody>
           </table>
         </div>
         <hr />
         <div style="text-align:right">
-          <h3>ราคารวม : <span style="color:orange">{{ order.sumPrice | number}}</span> บาท | กำไร : <span style="color:green">{{
-              order.profit | number}}</span> บาท</h3>
+          <h3>ราคารวม : <span style="color:orange">{{ sumPriceOrder(order) | number}}
+          </span> บาท | กำไร : <span style="color:green">{{ sumProfitOrder(order) | number}}</span> บาท</h3>
           <h5>ผู้ทำรายการ : {{ order.user.firstName }}</h5>
         </div>
       </div>

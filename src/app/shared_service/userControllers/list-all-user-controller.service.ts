@@ -18,7 +18,6 @@ export class ListAllUserControllerService {
       let users = new Array<User>();
       for(let user of responseData){
         let resUser = new User();
-        resUser.setId(user.id)
         resUser.setUsername(user.username)
         resUser.setPassword(user.password)
         resUser.setFirstName(user.firstName)

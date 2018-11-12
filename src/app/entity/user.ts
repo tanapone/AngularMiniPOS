@@ -1,5 +1,4 @@
 export class User {
-  private id: Number;
   private username: String;
   private password: String;
   private userType: Number;
@@ -10,14 +9,6 @@ export class User {
   private address: String;
   private userStatus:boolean;
   private authKey: String;
-
-	public getId(): Number {
-		return this.id;
-	}
-
-	public setId(id: Number): void {
-		this.id = id;
-	}
 
 	public getUsername(): String {
 		return this.username;

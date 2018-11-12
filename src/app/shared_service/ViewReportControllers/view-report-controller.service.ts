@@ -28,11 +28,8 @@ export class ViewReportControllerService {
           let resOrder = new Order();
           resOrder.setId(order.id);
           resOrder.setOrderDate(order.orderDate);
-          resOrder.setProfit(order.profit);
-          resOrder.setSumPrice(order.sumPrice);
           //Define user
           let user = new User();
-          user.setId(order.user.id);
           user.setUsername(order.user.username);
           user.setPassword(order.user.password);
           user.setUserType(order.user.userType);
@@ -48,6 +45,8 @@ export class ViewReportControllerService {
           for(let orderDetail of order.orderDetails){
             let resOrderDetail = new OrderDetail();
             resOrderDetail.setProductAmount(orderDetail.productAmount);
+            resOrderDetail.setProductCaptialPrice(orderDetail.productCaptialPrice);
+            resOrderDetail.setProductSalePrice(orderDetail.productSalePrice);
             //Define product in order detail
             let resProduct = new Product();
               // Company
@@ -104,11 +103,8 @@ export class ViewReportControllerService {
           let resOrder = new Order();
           resOrder.setId(order.id);
           resOrder.setOrderDate(order.orderDate);
-          resOrder.setProfit(order.profit);
-          resOrder.setSumPrice(order.sumPrice);
           //Define user
           let user = new User();
-          user.setId(order.user.id);
           user.setUsername(order.user.username);
           user.setPassword(order.user.password);
           user.setUserType(order.user.userType);
@@ -124,6 +120,8 @@ export class ViewReportControllerService {
           for(let orderDetail of order.orderDetails){
             let resOrderDetail = new OrderDetail();
             resOrderDetail.setProductAmount(orderDetail.productAmount);
+            resOrderDetail.setProductCaptialPrice(orderDetail.productCaptialPrice);
+            resOrderDetail.setProductSalePrice(orderDetail.productSalePrice);
             //Define product in order detail
             let resProduct = new Product();
               // Company
@@ -174,11 +172,8 @@ export class ViewReportControllerService {
           let resOrder = new Order();
           resOrder.setId(order.id);
           resOrder.setOrderDate(order.orderDate);
-          resOrder.setProfit(order.profit);
-          resOrder.setSumPrice(order.sumPrice);
           //Define user
           let user = new User();
-          user.setId(order.user.id);
           user.setUsername(order.user.username);
           user.setPassword(order.user.password);
           user.setUserType(order.user.userType);
@@ -194,6 +189,8 @@ export class ViewReportControllerService {
           for(let orderDetail of order.orderDetails){
             let resOrderDetail = new OrderDetail();
             resOrderDetail.setProductAmount(orderDetail.productAmount);
+            resOrderDetail.setProductCaptialPrice(orderDetail.productCaptialPrice);
+            resOrderDetail.setProductSalePrice(orderDetail.productSalePrice);
             //Define product in order detail
             let resProduct = new Product();
               // Company

@@ -13,9 +13,10 @@ export class AddCategoryControllerService {
   addCategory(category:Category):Promise<string|void>{
       return this.wsTask.doPost('/create/category?authKey='+this.localSt.retrieve('authKey'),category).then((data:any)=>{
           let responseData = data
-          if(responseData.message){
+          if(responseData.message && responseData.message != 'Success.'){
             return JSON.stringify(responseData)
           }else{
+            alert('เพิ่มข้อมูล ประเภทสินค้าสำเร็จ')
             this.router.navigate(['/list-all-categories'])
           }
       },error=>{

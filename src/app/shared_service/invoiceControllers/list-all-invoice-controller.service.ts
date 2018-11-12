@@ -22,13 +22,21 @@ export class ListAllInvoiceControllerService {
         let resInvoice = new Invoice();
         resInvoice.setId(invoice.id);
         resInvoice.setDate(invoice.invoiceDate);
-        resInvoice.setSumPrice(invoice.sumPrice);
+        // Company
+        let resCompany = new Company();
+        resCompany.setId(invoice.company.id);
+        resCompany.setCompanyName(invoice.company.companyName);
+        resCompany.setCompanyAddress(invoice.company.companyAddress);
+        resCompany.setCompanyPhoneNumber(invoice.company.companyPhoneNumber);
+        resCompany.setCompanyEmail(invoice.company.companyEmail);
+
+        resInvoice.setCompany(resCompany);
 
         let resInvoiceDetails = new Array<InvoiceDetail>();
         for(let invoiceDetail of invoice.invoiceDetails){
             let resInvoiceDetail = new InvoiceDetail();
             resInvoiceDetail.setProductInDate(invoiceDetail.productInDate);
-            resInvoiceDetail.setProductIn(invoiceDetail.productIn);
+            resInvoiceDetail.setProductInQuantity(invoiceDetail.productInQuantity);
             resInvoiceDetail.setQuantity(invoiceDetail.quantity);
 
             let resProduct = new Product();
