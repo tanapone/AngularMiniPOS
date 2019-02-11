@@ -65,7 +65,7 @@
       </select>
       <span>กรุณาเลือกปี</span>
       <select name="yearOfQuater" class="form-control" [(ngModel)]="yearOfQuater">
-        <option *ngFor="let i of [2018,2017,2016,2015]" selected>
+        <option *ngFor="let i of [2019,2018,2017,2016,2015]" selected>
           {{i}}
         </option>
       </select>
@@ -116,6 +116,13 @@
                 <td>{{ orderDetail.productAmount }} ชิ้น</td>
                 <td>{{ orderDetail.productCaptialPrice }} บาท</td>
                 <td>{{ orderDetail.productSalePrice }} บาท</td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>ราคาทุนรวม {{ sumCapitalPrice(order) | number }} บาท</td>
+                <td>ราคาขายรวม {{ sumSalePrice(order) | number }} บาท</td>
               </tr>
             </tbody>
           </table>

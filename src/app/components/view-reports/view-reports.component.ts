@@ -163,6 +163,22 @@ export class ViewReportsComponent implements OnInit {
     return sumPrice;
   }
 
+  sumCapitalPrice(order:Order):number{
+    let sumCapitalPrice:number = 0;
+      order.getOrderDetails().forEach(function(orderDetail){
+        sumCapitalPrice += orderDetail.getProductCaptialPrice();
+      })
+      return sumCapitalPrice;
+  }
+
+  sumSalePrice(order:Order):number{
+    let sumSalePrice:number = 0;
+    order.getOrderDetails().forEach(function(orderDetail){
+      sumSalePrice += orderDetail.getProductSalePrice();
+    })
+    return sumSalePrice;
+  }
+
   sumProfitOrder(order:Order):number{
     let sumProfit:number = 0;
       order.getOrderDetails().forEach(function(orderDetail){
